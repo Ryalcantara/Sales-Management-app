@@ -1,6 +1,10 @@
+@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
 
 /* // add the code bellow */
 @layer utilities {

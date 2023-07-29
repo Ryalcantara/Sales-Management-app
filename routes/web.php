@@ -55,7 +55,7 @@ Route::get('/customers', [CustomerController::class, 'index']);
 Route::post('/add-customer', [CustomerController::class, 'create']);
 
 // EDIT CUSTOMERS
-// Route::get('/customers/{id}', [CustomerController::class, 'show']);
+Route::put('/customers/{id}', [CustomerController::class, 'update']);
 
 
 // deductions

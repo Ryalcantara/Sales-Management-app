@@ -62,7 +62,17 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //    dd($request);
+           $customers = Customers::findOrFail($request->input('id'));
+           $validated = $request->validate([
+               'customer_name'=> ['required'],
+               'contact_number'=> ['required'],
+               'customer_type'=> ['required'],
+           ]);
+   
+           $customers->update($validated);
+   
+           return back();
     }
 
     /**
