@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\Pending_SalesController;
@@ -16,6 +17,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Route::get       get data
+// Route::post      post data
+// Route::put       edit data
+// Route::patch     edit data but small portions (rarely used, just use put)
+// Route::delete    delete data
+// Route::options   control specific url
+// Route::match     get matching methods in array`
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,10 +49,13 @@ Route::post('/add-exp', [ExpensesController::class, 'create']);
 
 
 
-// customers
-Route::get('/customers', function () {
-    return view('customers');
-});
+// CUSTOMERS
+Route::get('/customers', [CustomerController::class, 'index']);
+// ADD CUSTOMERS
+Route::post('/add-customer', [CustomerController::class, 'create']);
+
+// EDIT CUSTOMERS
+// Route::get('/customers/{id}', [CustomerController::class, 'show']);
 
 
 // deductions

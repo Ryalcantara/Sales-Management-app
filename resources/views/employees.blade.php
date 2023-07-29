@@ -4,13 +4,21 @@
 
 
 
+    <!-- Modal toggle -->
+    <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+        class="text-gray-900 shadow-md sm:rounded-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+        type="button">
+        Add Employee</button>
+
+    <x-add-emp-modal />
+
     @php
         $array = array();;
     @endphp
 
 
 
-    <div class="w-full backdrop-blur-sm  rounded-lg p-4">
+    <div class="w-full rounded-lg p-4">
 
         <div>
             <h4>Employee</h4>
@@ -44,6 +52,7 @@
                                     </span>
                                 </a>
                                 <button type="button"  data-modal-target="popup-modal"
+                                    data-modal-toggle="popup-modal_{{ $employee->id }}"
                                     class="text-red-700 border border-red-700 hover:bg-red-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800 dark:hover:bg-red-500">
                                     <span>
                                         <i class="fa-solid fa-trash"></i>

@@ -19,16 +19,10 @@
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Add Products</h3>
                 <form action="add-emp" method="POST">
                     @csrf
-                    {{-- <div class="relative z-0 w-full mb-6 group">
-                        <input name="id"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" " required>
-                        <label for="floating_id"
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ID:</label>
-                    </div> --}}
+             
 
                     <div class="relative z-0 w-full mb-6 group">
-                        <input name="name"
+                        <input name="product_name"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" " required>
                         <label
@@ -36,7 +30,8 @@
                     </div>
 
                     <div class="relative z-0 w-full mb-6 group">
-                        <input name="email"
+                        <input name="batch_number"
+                        type="number"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" " required>
                         <label
@@ -46,39 +41,34 @@
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="address"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            name="address" placeholder=" " required>
+                            name="date_exp" placeholder=" " required>
                         <label
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Date of Expiration:</label>
                     </div>
 
                     <div class="relative z-0 w-full mb-6 group">
 
-                        <input name="contact"
+                        <input name="price"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             pattern="^(09|\+639)\d{9}$" data-bv-regexp-message="Please follow format" placeholder=" "
                             required>
                         <label
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Contact
-                            No.:</label>
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price:</label>
 
                     </div>
 
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="number"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            name="rate" placeholder=" " pattern="/^\\d+$/"
-                            data-bv-regexp-message="Please follow format" required>
+                            name="quantity" placeholder=" ">
                         <label
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Rate:</label>
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Quantity:</label>
                     </div>
                     <div class="relative z-0 w-full group">
-                        <label class="peer-focus:font-medium text-sm text-gray-500 dark:text-gray-400">Position</label>
+                        <label class="peer-focus:font-medium text-sm text-gray-500 dark:text-gray-400">Availability:</label>
                         <div class="w-full">
-                            <select class="w-full rounded-lg border-gray-300" name="role">
-                                <option selected>Choose...</option>
-                                <option value="Supervisor">Supervisor</option>
-                                <option value="Head Therapist">Head Manager</option>
-                                <option value="Therapist">Employee</option>
+                            <select class="w-full rounded-lg border-gray-300" name="availability">
+                                <option value="Available" selected>Available</option>
                             </select>
                         </div>
                     </div>

@@ -18,7 +18,7 @@
 
 
 
-    <div class="w-full backdrop-blur-sm  rounded-lg p-4">
+    <div class="w-full rounded-lg p-4">
 
         <div>
             <h4>Deductions</h4>
