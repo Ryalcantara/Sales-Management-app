@@ -10,7 +10,7 @@
         type="button">
         Add Services</button>
 
-    <x-add-emp-modal />
+    <x-add-services-modal />
 
     @php
         $array = array();;
@@ -31,32 +31,25 @@
             <table class="w-full text-sm text-left text-gray-800">
                 <thead>
                     <tr>
-                        <th class="p-4">Date</th>
+                        <th class="p-4">Services</th>
                         <th class="p-4">Category</th>
-                        <th class="p-4">Payments</th>
+                        <th class="p-4">Amount</th>
                         <th class="p-4">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                        <tr>
-                            <td class="p-4"></td>
-                            <td class="p-4"></td>
-                            <td class="p-4"></td>
+                   
+                    @foreach ($services as $service)
+                    <tr>
+                            <td class="p-4">{{ $service->service_name }}</td>
+                            <td class="p-4">{{ $service->category }}</td>
+                            <td class="p-4">{{ $service->amount }}</td>
                             <td class="p-4">
-                                <a href="#" type="button"
-                                    class="text-green-700 border border-green-700 hover:bg-green-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:focus:ring-green-800 dark:hover:bg-green-500">
-                                    <span>
-                                        <i class="fa-solid fa-eye"></i>
-                                    </span>
-                                </a>
-                                <button type="button" 
-                                    class="text-red-700 border border-red-700 hover:bg-red-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800 dark:hover:bg-red-500">
-                                    <span>
-                                        <i class="fa-solid fa-trash"></i>
-                                    </span>
-                                </button>
+                            
                             </td>
                         </tr>
+                    @endforeach
+
                         
                     </tbody>
             </table>

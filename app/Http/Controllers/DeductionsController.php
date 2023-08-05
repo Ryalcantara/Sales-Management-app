@@ -2,27 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pending_Sales;
+use App\Models\Deductions;
 use Illuminate\Http\Request;
 
-class Pending_SalesController extends Controller
+class DeductionsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $data = Pending_Sales::all();
+        $data = Deductions::all();
 
-        // return view('/pending_sales', ['pending_sales' => $data]);
+        return view('deductions', ['deductions' => $data]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'date_id'=> ['required'],
+            'employee'=> ['required'],
+            'amount'=> ['required'],
+        ]);
+
+
+        Deductions::create($validated);
+        return redirect('/deductions');
+      
     }
 
     /**

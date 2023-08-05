@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pending_sales', function (Blueprint $table) {
+        Schema::create('deductions', function (Blueprint $table) {
             $table->id();
+            $table->string('date_id');
+            $table->string('employee');
+            $table->integer('amount');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pending_sales');
+        Schema::dropIfExists('deductions');
     }
 };

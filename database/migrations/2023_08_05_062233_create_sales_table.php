@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->string('customer');
+            $table->string('employee');
+            $table->string('services');
+            $table->string('products');
+            $table->string('quantity');
+            $table->integer('gcash');
+            $table->integer('gift_certificate');
+            $table->integer('gift_voucher');
+            $table->integer('loyalty');
             $table->timestamps();
         });
     }

@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Expenses;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
-class ExpensesController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Expenses::all();
-        return view('/expenses', ['expenses' => $data]);
+        $data = Products::all();
+
+        return view('products', ['products' => $data]);
     }
 
     /**
@@ -22,13 +23,16 @@ class ExpensesController extends Controller
     public function create(Request $request)
     {
         $validated = $request->validate([
-            'date'=> ['required'],
-            'expense_type'=> ['required'],
-            'payment'=> ['required'],
+            'product_name'=> ['required'],
+            'batch_number'=> ['required'],
+            'date_exp'=> ['required'],
+            'price'=> ['required'],
+            'quantity'=> ['required'],
+            'availability'=> ['required'],
         ]);
 
-        Expenses::create($validated);
-        return redirect('/expenses');
+        Products::create($validated);
+        return redirect('/products');
     }
 
     /**
@@ -60,14 +64,17 @@ class ExpensesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $expense = Expenses::findOrFail($request->input('id'));
+        $product = Products::findOrFail($request->input('id'));
         $validated = $request->validate([
-            'date'=> ['required'],
-            'expense_type'=> ['required'],
-            'payment'=> ['required'],
+            'product_name'=> ['required'],
+            'batch_number'=> ['required'],
+            'date_exp'=> ['required'],
+            'price'=> ['required'],
+            'quantity'=> ['required'],
+            'availability'=> ['required'],
         ]);
 
-        $expense->update($validated);
+        $product->update($validated);
 
         return back();
     }

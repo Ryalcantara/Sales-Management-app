@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DeductionsController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExpensesController;
-use App\Http\Controllers\Pending_SalesController;
-use App\Models\Pending_Sales;
+use App\Http\Controllers\PendingController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\TimeLogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,10 +30,18 @@ use Illuminate\Support\Facades\Route;
 // Route::options   control specific url
 // Route::match     get matching methods in array`
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::get('/index', function (){
+    return view('index');
 });
 
+
+
+
+
+
+// EMPLOYEES
 Route::get('/employees', [EmployeeController::class, 'index']);
 
 // add employee
@@ -41,11 +53,15 @@ Route::get('/view_employee/{id}', [EmployeeController::class, 'show']);
 // edit employee
 Route::put('/view_employee/{id}', [EmployeeController::class, 'update']);
 
+// delete employee
+Route::delete('/employees/{id}', [EmployeeController::class, 'destroy']);
+
 
 
 // EXPENSES
 Route::get('/expenses', [ExpensesController::class, 'index']);
 Route::post('/add-exp', [ExpensesController::class, 'create']);
+Route::put('/expenses/{id}', [ExpensesController::class, 'update']);
 
 
 
@@ -53,15 +69,20 @@ Route::post('/add-exp', [ExpensesController::class, 'create']);
 Route::get('/customers', [CustomerController::class, 'index']);
 // ADD CUSTOMERS
 Route::post('/add-customer', [CustomerController::class, 'create']);
-
 // EDIT CUSTOMERS
 Route::put('/customers/{id}', [CustomerController::class, 'update']);
 
 
 // deductions
-Route::get('/deductions', function () {
-    return view('deductions');
-});
+Route::get('/deductions', [DeductionsController::class, 'index']);
+
+Route::post('/deductions', [DeductionsController::class, 'create']);
+
+
+// products
+Route::get('/products', [ProductsController::class, 'index']);
+Route::post('/products', [ProductsController::class, 'create']);
+Route::put('/products/{id}', [ProductsController::class, 'update']);
 
 
 
@@ -72,34 +93,29 @@ Route::get('/backup', function () {
     return view('backup');
 });
 
+// SERVICES
+Route::get('/services', [ServicesController::class, 'index']);
+Route::post('add-services', [ServicesController::class, 'create']);
 
 
-// inventory
-Route::get('/inventory', function () {
-    return view('inventory');
-});
-
-
+// Pending Sales
+Route::get('/pending_sales', [PendingController::class, 'index']);
+Route::post('/add-pending', [PendingController::class, 'create']);
+Route::get('/submit', [PendingController::class, 'submit']);
 
 
 Route::get('/time', function () {
     return view('time');
 });
 
-
-Route::get('/sales', function () {
-    return view('sales');
-});
-
-Route::get('/products', function(){
-    return view('products');
-});
+Route::get('/', [TimeLogController::class, 'index']);
 
 
 
-Route::get('/pending_sales', function(){
-    return view('pending_sales');
-});
+Route::get('/sales', [SalesController::class, 'index']);
+
+
+
 
 Route::get('/payroll', function(){
     return view('payroll');

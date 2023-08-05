@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Deductions extends Model
 {
 
     protected $fillable = [
-        'product_name',
-        'batch_number',
-        'date_exp',
-        'price',
-        'quantity',
-        'availability'
+        'date_id',
+        'employee',
+        'amount',
     ];
+    
     use HasFactory;
 }

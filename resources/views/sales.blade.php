@@ -19,14 +19,37 @@
             <table class="w-full text-sm text-left text-gray-800">
                 <thead>
                     <tr>
-                        <th class="p-4">Staff ID</th>
+                        <th class="p-4">Date</th>
+                        <th class="p-4">Customer</th>
                         <th class="p-4">Employee</th>
-                        <th class="p-4">Employee Position</th>
+                        <th class="p-4">Services</th>
+                        <th class="p-4">Products</th>
+                        <th class="p-4">Quantity</th>
+                        <th class="p-4">GCASH</th>
+                        <th class="p-4">Gift Certificate</th>
+                        <th class="p-4">Gift Voucher</th>
+                        <th class="p-4">Loyalty</th>
                         <th class="p-4">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @foreach ($sales as $sale)
+                        <tr>
+                            <td class="p-4">{{ $sale->created_at->format('Y-m-d') }}</td>
+                            <td class="p-4">{{ $sale->customer }}</td>
+                            <td class="p-4">{{ $sale->employee }}</td>
+                            <td class="p-4">{{ $sale->services }}</td>
+                            <td class="p-4">{{ $sale->products }}</td>
+                            <td class="p-4">{{ $sale->quantity }}</td>
+                            <td class="p-4">{{ $sale->gcash }}</td>
+                            <td class="p-4">{{ $sale->gift_certificate }}</td>
+                            <td class="p-4">{{ $sale->gift_voucher }}</td>
+                            <td class="p-4">{{ $sale->loyalty }}</td>
+                            <td class="p-4">
+
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

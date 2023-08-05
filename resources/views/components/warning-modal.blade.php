@@ -4,7 +4,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button type="button"
                 class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                data-modal-hide="popup-modal">
+                data-modal-hide="popup-modal_{{ $employee->id }}">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -25,11 +25,13 @@
 
                 
                 <form action="/employees/{{ $employee->id }}" method="post">
+                    @method('delete')
+                    @csrf
 
-                    <a data-modal-hide="popup-modal" type="button"
+                    <button type="submit" data-modal-hide="popup-modal"
                         class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                         Yes, I'm sure
-                    </a>
+                    </button>
                 </form>
 
 

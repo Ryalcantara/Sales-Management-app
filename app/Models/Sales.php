@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sales extends Model
 {
+    protected $fillable = [
+        'customer',
+        'employee',
+        'services',
+        'products',
+        'quantity',
+        'gcash',
+        'gift_certificate',
+        'gift_voucher',
+        'loyalty'
+    ];
     use HasFactory;
 }

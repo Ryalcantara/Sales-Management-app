@@ -10,7 +10,7 @@
         type="button">
         Add Deductions</button>
 
-    <x-add-emp-modal />
+    <x-add-deductions-modal />
 
     @php
         $array = array();;
@@ -38,10 +38,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                        <tr>
-                            <td class="p-4"></td>
-                            <td class="p-4"></td>
-                            <td class="p-4"></td>
+                    <tr>
+                            @foreach ($deductions as $deduction)
+                                
+                            <td class="p-4">{{ $deduction->date_id }}</td>
+                            <td class="p-4">{{ $deduction->employee }}</td>
+                            <td class="p-4">{{ $deduction->amount }}</td>
                             <td class="p-4">
                                 <a href="#" type="button"
                                     class="text-green-700 border border-green-700 hover:bg-green-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:focus:ring-green-800 dark:hover:bg-green-500">
@@ -56,7 +58,9 @@
                                     </span>
                                 </button>
                             </td>
+                            @endforeach
                         </tr>
+                        
                         
                     </tbody>
             </table>

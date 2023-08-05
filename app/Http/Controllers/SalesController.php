@@ -2,33 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Expenses;
+use App\Models\Sales;
 use Illuminate\Http\Request;
 
-class ExpensesController extends Controller
+class SalesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Expenses::all();
-        return view('/expenses', ['expenses' => $data]);
+        $data = Sales::all();
+
+        return view('sales', ['sales' => $data]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
     {
-        $validated = $request->validate([
-            'date'=> ['required'],
-            'expense_type'=> ['required'],
-            'payment'=> ['required'],
-        ]);
-
-        Expenses::create($validated);
-        return redirect('/expenses');
+        //
     }
 
     /**
@@ -60,16 +54,7 @@ class ExpensesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $expense = Expenses::findOrFail($request->input('id'));
-        $validated = $request->validate([
-            'date'=> ['required'],
-            'expense_type'=> ['required'],
-            'payment'=> ['required'],
-        ]);
-
-        $expense->update($validated);
-
-        return back();
+        //
     }
 
     /**
