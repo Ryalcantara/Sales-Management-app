@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employees;
+use App\Models\TimeLog;
 use Illuminate\Http\Request;
 
 class TimeLogController extends Controller
@@ -12,17 +13,30 @@ class TimeLogController extends Controller
      */
     public function index()
     {
-        $data = Employees::all();
 
-        return view('timeLog', ['employees' => $data]);
+        return view('timeLog')
+        ->with('employees', Employees::all());
+
+        
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'employee' => ['required'],
+            'time_in' => ['required']
+        ]);
+
+        TimeLog::create($validated);
+
+
+        $data = Employees::all();
+
+        return view('/timeLog', ['employees' => $data]);
+
     }
 
     /**

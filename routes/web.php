@@ -109,6 +109,7 @@ Route::get('/time', function () {
 });
 
 Route::get('/', [TimeLogController::class, 'index']);
+Route::post('/timeLog', [TimeLogController::class, 'create']);
 
 
 
