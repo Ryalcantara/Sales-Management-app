@@ -14,6 +14,9 @@
 
 
               <form action="/add-pending" method="POST">
+
+                <input type="hidden" name="date_id" value="{{ date('m/d/Y') }}">
+
                 @csrf
                   <!-- CUSTOMER -->
                   @php

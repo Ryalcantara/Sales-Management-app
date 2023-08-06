@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Pending extends Model
 {
     protected $fillable = [
+        'date_id',
         'customer',
-        'employee',
+        'employees_id',
         'services',
         'products',
         'quantity',

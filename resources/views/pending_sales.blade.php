@@ -38,9 +38,9 @@
                 <tbody>
                     @foreach ($pending_sales as $pending)
                         <tr>
-                            <td class="p-4">{{ $pending->created_at }}</td>
+                            <td class="p-4">{{ $pending->date_id }}</td>
                             <td class="p-4">{{ $pending->customer }}</td>
-                            <td class="p-4">{{ $pending->employee }}</td>
+                            <td class="p-4">{{ $pending->name }}</td>
                             <td class="p-4">{{ $pending->services }}</td>
                             <td class="p-4">{{ $pending->products }}</td>
                             <td class="p-4">{{ $pending->quantity }}</td>

@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employees;
 use App\Models\Sales;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SalesController extends Controller
+class PayrollController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = DB::table('sales')
-        ->join('employees', 'sales.employees_id', '=', 'employees.employees_id')
-        ->get();
-
-        return view('sales', ['sales' => $data]);
+        return view('payroll');
     }
 
     /**
@@ -42,6 +39,21 @@ class SalesController extends Controller
     public function show(string $id)
     {
         //
+    }
+
+    public function dateRange(Request $request)
+    {
+        // $data = Sales::whereBetween('created_at', [$request->start, $request->end]);
+
+        // $payrolls = Payroll::whereBetween('created_at', [$startDate, $endDate])
+        // ->get();
+        $data = DB::table('sales')
+        ->join('employees', 'sales.employees_id', '=', 'employees.employees_id')
+        ->whereBetween('date_id', [$request->start, $request->end])
+        ->get();
+
+
+        return view('/payroll-show', ['payrolls' => $data]);
     }
 
     /**

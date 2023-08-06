@@ -10,6 +10,7 @@ use App\Models\Sales;
 use App\Models\Services;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PendingController extends Controller
 {
@@ -18,8 +19,11 @@ class PendingController extends Controller
      */
     public function index()
     {
-        $data = Pending::all();
+        $data = DB::table('pendings')
+             ->join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
+             ->get();
 
+        
         return view('/pending_sales', ['pending_sales' => $data])
         ->with('customers', Customers::all())
         ->with('employees', Employees::all())
@@ -33,8 +37,9 @@ class PendingController extends Controller
     public function create(Request $request)
     {
         $validated = $request->validate([
+            'date_id'=> ['required'],
             'customer'=> ['required'],
-            'employee'=> ['required'],
+            'employees_id'=> ['required'],
             'services'=> ['required'],
             'products'=> ['required'],
             'quantity'=> ['required'],
@@ -93,11 +98,18 @@ class PendingController extends Controller
     
     public function submit()
     {
+
+        // $results = DB::table('pending')
+        //      ->join('employees', 'pending.employees_id', '=', 'employees.employees_id')
+        //      ->select('employees.*')
+        //      ->get();
+
         $sourceData = Pending::all();
         foreach ($sourceData as $data) {
             Sales::create([
+                'date_id'=> $data->date_id,
                 'customer' => $data->customer, // Map columns accordingly
-                'employee' => $data->employee,
+                'employees_id' => $data->employees_id,
                 'services' => $data->services,
                 'products' => $data->products,
                 'quantity' => $data->quantity,

@@ -35,9 +35,9 @@
                 <tbody>
                     @foreach ($sales as $sale)
                         <tr>
-                            <td class="p-4">{{ $sale->created_at->format('Y-m-d') }}</td>
+                            <td class="p-4">{{ $sale->date_id }}</td>
                             <td class="p-4">{{ $sale->customer }}</td>
-                            <td class="p-4">{{ $sale->employee }}</td>
+                            <td class="p-4">{{ $sale->name }}</td>
                             <td class="p-4">{{ $sale->services }}</td>
                             <td class="p-4">{{ $sale->products }}</td>
                             <td class="p-4">{{ $sale->quantity }}</td>

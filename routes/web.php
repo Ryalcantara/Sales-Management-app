@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeductionsController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExpensesController;
+use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\PendingController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SalesController;
@@ -117,9 +118,8 @@ Route::get('/sales', [SalesController::class, 'index']);
 
 
 
-Route::get('/payroll', function(){
-    return view('payroll');
-});
+Route::get('/payroll', [PayrollController::class, 'index']);
+Route::post('/payroll-show', [PayrollController::class, 'daterange']);
 
 Route::get('/financial', function(){
     return view('financial');

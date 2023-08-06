@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('pendings', function (Blueprint $table) {
             $table->id();
+            $table->string('date_id');
             $table->string('customer');
-            $table->string('employee');
+            $table->string('employees_id');
             $table->string('services');
             $table->string('products');
             $table->string('quantity');

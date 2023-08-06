@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Sales extends Model
 {
     protected $fillable = [
+        'date_id',
         'customer',
-        'employee',
+        'employees_id',
         'services',
         'products',
         'quantity',
