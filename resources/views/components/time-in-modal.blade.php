@@ -20,6 +20,7 @@
             <div class="p-6 space-y-6">
                 <form action="/timeLog" method="post">
                     @csrf
+                    <input type="hidden" name="date" value="{{ date('m/d/Y') }}">
                     <input type="hidden" name="employee" value="{{ $employee->name }}">
                     <input type="hidden" name="time_in" value="{{ date(' h:i:s a') }}">
                 <p class="text-center">{{ $employee->name }} is logging in at:</p>

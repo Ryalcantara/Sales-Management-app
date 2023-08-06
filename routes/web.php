@@ -104,11 +104,10 @@ Route::post('/add-pending', [PendingController::class, 'create']);
 Route::get('/submit', [PendingController::class, 'submit']);
 
 
-Route::get('/time', function () {
-    return view('time');
-});
+Route::get('/time', [TimeLogController::class, 'index3']);
 
 Route::get('/', [TimeLogController::class, 'index']);
+Route::get('/timeRedirect', [TimeLogController::class, 'index2']);
 Route::post('/timeLog', [TimeLogController::class, 'create']);
 
 

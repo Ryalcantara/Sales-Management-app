@@ -13,11 +13,21 @@ class TimeLogController extends Controller
      */
     public function index()
     {
-
-        return view('timeLog')
+        $data = TimeLog::all();
+        return view('timeLog', ['time' => $data])
         ->with('employees', Employees::all());
+    }
 
-        
+    public function index2()
+    {
+        $data = TimeLog::all();
+        return view('timeLog', ['time' => $data])
+        ->with('employees', Employees::all());
+    }
+    public function index3()
+    {
+        $data = TimeLog::all();
+        return view('time', ['time' => $data]);
     }
 
     /**
@@ -26,6 +36,7 @@ class TimeLogController extends Controller
     public function create(Request $request)
     {
         $validated = $request->validate([
+            'date' => ['required'],
             'employee' => ['required'],
             'time_in' => ['required']
         ]);
@@ -35,7 +46,10 @@ class TimeLogController extends Controller
 
         $data = Employees::all();
 
-        return view('/timeLog', ['employees' => $data]);
+        return redirect('/timeRedirect')
+        ->with('time', TimeLog::all())
+        ->with('employees', Employees::all());
+
 
     }
 
