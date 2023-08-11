@@ -21,6 +21,8 @@ class PendingController extends Controller
     {
         $data = DB::table('pendings')
              ->join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
+             ->join('services', 'pendings.service_id', '=', 'services.service_id')
+             ->join('products', 'pendings.product_id', '=', 'products.product_id')
              ->get();
 
         
@@ -40,9 +42,9 @@ class PendingController extends Controller
             'date_id'=> ['required'],
             'customer'=> ['required'],
             'employees_id'=> ['required'],
-            'services'=> ['required'],
-            'products'=> ['required'],
-            'quantity'=> ['required'],
+            'service_id'=> ['required'],
+            'product_id'=> ['required'],
+            'quant'=> ['required'],
             'gcash'=> ['required'],
             'gift_certificate'=> ['required'],
             'gift_voucher'=> ['required'],
@@ -110,9 +112,9 @@ class PendingController extends Controller
                 'date_id'=> $data->date_id,
                 'customer' => $data->customer, // Map columns accordingly
                 'employees_id' => $data->employees_id,
-                'services' => $data->services,
-                'products' => $data->products,
-                'quantity' => $data->quantity,
+                'service_id' => $data->service_id,
+                'product_id' => $data->product_id,
+                'quant' => $data->quant,
                 'gcash' => $data->gcash,
                 'gift_certificate' => $data->gift_certificate,
                 'gift_voucher' => $data->gift_voucher,

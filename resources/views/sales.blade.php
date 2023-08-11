@@ -38,8 +38,8 @@
                             <td class="p-4">{{ $sale->date_id }}</td>
                             <td class="p-4">{{ $sale->customer }}</td>
                             <td class="p-4">{{ $sale->name }}</td>
-                            <td class="p-4">{{ $sale->services }}</td>
-                            <td class="p-4">{{ $sale->products }}</td>
+                            <td class="p-4">{{ $sale->service_name }}</td>
+                            <td class="p-4">{{ $sale->product_name }}</td>
                             <td class="p-4">{{ $sale->quantity }}</td>
                             <td class="p-4">{{ $sale->gcash }}</td>
                             <td class="p-4">{{ $sale->gift_certificate }}</td>

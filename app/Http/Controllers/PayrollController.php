@@ -43,17 +43,35 @@ class PayrollController extends Controller
 
     public function dateRange(Request $request)
     {
-        // $data = Sales::whereBetween('created_at', [$request->start, $request->end]);
-
-        // $payrolls = Payroll::whereBetween('created_at', [$startDate, $endDate])
-        // ->get();
-        $data = DB::table('sales')
-        ->join('employees', 'sales.employees_id', '=', 'employees.employees_id')
-        ->whereBetween('date_id', [$request->start, $request->end])
-        ->get();
 
 
-        return view('/payroll-show', ['payrolls' => $data]);
+        // $data = DB::table('employees')
+        // ->join('sales', 'employees.employees_id', '=', 'sales.employees_id')
+        // ->join('services', 'sales.service_id', '=', 'services.service_id')
+        // ->join('products', 'sales.product_id', '=', 'products.product_id')
+        // ->whereBetween('sales.date_id', [$request->start, $request->end])
+        // ->sum('services.amount');
+
+        $employees = DB::table('employees')->get();
+
+        foreach ($employees as $employee) {
+            $salesData = DB::table('sales')
+                ->join('services', 'sales.service_id', '=', 'services.service_id')
+                ->join('products', 'sales.product_id', '=', 'products.product_id')
+                ->where('sales.employees_id', $employee->employees_id)
+                ->whereBetween('sales.date_id', [$request->start, $request->end])
+                ->select(
+                    DB::raw('SUM(services.amount) as services_amount'),
+                    DB::raw('SUM(products.price) as products_amount')
+                )
+                ->first();
+        
+            $employee->servicesAmount = $salesData->services_amount ?? 0;
+            $employee->productsAmount = $salesData->products_amount ?? 0;
+        }
+        
+        return view('payroll-show', ['payrolls' => $employees]);
+        // dd($data);
     }
 
     /**

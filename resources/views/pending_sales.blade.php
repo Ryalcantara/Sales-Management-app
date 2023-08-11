@@ -41,8 +41,8 @@
                             <td class="p-4">{{ $pending->date_id }}</td>
                             <td class="p-4">{{ $pending->customer }}</td>
                             <td class="p-4">{{ $pending->name }}</td>
-                            <td class="p-4">{{ $pending->services }}</td>
-                            <td class="p-4">{{ $pending->products }}</td>
+                            <td class="p-4">{{ $pending->service_name }}</td>
+                            <td class="p-4">{{ $pending->product_name }}</td>
                             <td class="p-4">{{ $pending->quantity }}</td>
                             <td class="p-4">{{ $pending->gcash }}</td>
                             <td class="p-4">{{ $pending->gift_certificate }}</td>

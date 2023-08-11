@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('date_id');
             $table->string('customer');
             $table->string('employees_id');
-            $table->string('services');
-            $table->string('products');
-            $table->string('quantity');
+            $table->string('service_id');
+            $table->string('product_id');
+            $table->string('quant');
             $table->integer('gcash');
             $table->integer('gift_certificate');
             $table->integer('gift_voucher');

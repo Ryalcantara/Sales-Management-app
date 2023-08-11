@@ -15,6 +15,8 @@ class SalesController extends Controller
     {
         $data = DB::table('sales')
         ->join('employees', 'sales.employees_id', '=', 'employees.employees_id')
+        ->join('services', 'sales.service_id', '=', 'services.service_id')
+        ->join('products', 'sales.product_id', '=', 'products.product_id')
         ->get();
 
         return view('sales', ['sales' => $data]);
