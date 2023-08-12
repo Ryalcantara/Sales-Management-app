@@ -52,6 +52,26 @@ class PayrollController extends Controller
         // ->whereBetween('sales.date_id', [$request->start, $request->end])
         // ->sum('services.amount');
 
+        // $employees = DB::table('employees')->get();
+
+        // foreach ($employees as $employee) {
+        //     $salesData = DB::table('sales')
+        //         ->join('services', 'sales.service_id', '=', 'services.service_id')
+        //         ->join('products', 'sales.product_id', '=', 'products.product_id')
+        //         ->where('sales.employees_id', $employee->employees_id)
+        //         ->whereBetween('sales.date_id', [$request->start, $request->end])
+        //         ->select(
+        //             DB::raw('SUM(services.amount) as services_amount'),
+        //             DB::raw('SUM(products.price) as products_amount')
+        //         )
+        //         ->first();
+
+        //     $employee->servicesAmount = $salesData->services_amount ?? 0;
+        //     $employee->productsAmount = $salesData->products_amount ?? 0;
+        // }
+
+
+
         $employees = DB::table('employees')->get();
 
         foreach ($employees as $employee) {
@@ -62,16 +82,29 @@ class PayrollController extends Controller
                 ->whereBetween('sales.date_id', [$request->start, $request->end])
                 ->select(
                     DB::raw('SUM(services.amount) as services_amount'),
-                    DB::raw('SUM(products.price) as products_amount')
+                    DB::raw('SUM(products.price) as products_amount'),
+                    'services.category' // Include the category column
                 )
-                ->first();
-        
-            $employee->servicesAmount = $salesData->services_amount ?? 0;
-            $employee->productsAmount = $salesData->products_amount ?? 0;
+                ->groupBy('services.category') // Group by category
+                ->get(); // Retrieve multiple rows
+
+            $totalAmount = 0;
+
+            foreach ($salesData as $sale) {
+                if ($sale->category === 'Hard') {
+                    $totalAmount += $sale->services_amount * 0.10;
+                } elseif ($sale->category === 'Light') {
+                    $totalAmount += $sale->services_amount * 0.07;
+                }
+            }
+
+            $employee->totalAmount = $totalAmount;
+            // ... other properties if needed
         }
-        
-        return view('payroll-show', ['payrolls' => $employees]);
-        // dd($data);
+
+
+        // return view('payroll-show', ['payrolls' => $employees]);
+        dd($employees);
     }
 
     /**
