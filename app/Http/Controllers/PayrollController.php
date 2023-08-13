@@ -90,6 +90,14 @@ class PayrollController extends Controller
 
             $totalAmount = 0;
 
+            // Calculate standardpay from time_logs
+            $timeLogData = DB::table('time_logs')
+                ->join('employees', 'time_logs.employee', '=', 'employees.employees_id')
+                ->where('time_logs.employee', $employee->employees_id)
+                ->whereBetween('date', [$request->start, $request->end])
+                ->sum('rate');
+
+
             foreach ($salesData as $sale) {
                 if ($sale->category === 'Hard') {
                     $totalAmount += $sale->services_amount * 0.10;
@@ -99,8 +107,12 @@ class PayrollController extends Controller
             }
 
             $employee->totalAmount = $totalAmount;
-            // ... other properties if needed
+            $employee->standardPay = $timeLogData;
         }
+
+
+
+
 
 
         // return view('payroll-show', ['payrolls' => $employees]);

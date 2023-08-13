@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employees;
 use App\Models\TimeLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TimeLogController extends Controller
 {
@@ -13,20 +14,26 @@ class TimeLogController extends Controller
      */
     public function index()
     {
-        $data = TimeLog::all();
+        $data = DB::table('time_logs')
+        ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+        ->get();
         return view('timeLog', ['time' => $data])
         ->with('employees', Employees::all());
     }
 
     public function index2()
     {
-        $data = TimeLog::all();
+        $data = DB::table('time_logs')
+        ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+        ->get();
         return view('timeLog', ['time' => $data])
         ->with('employees', Employees::all());
     }
     public function index3()
     {
-        $data = TimeLog::all();
+        $data = DB::table('time_logs')
+        ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+        ->get();
         return view('time', ['time' => $data]);
     }
 
@@ -36,8 +43,8 @@ class TimeLogController extends Controller
     public function create(Request $request)
     {
         $validated = $request->validate([
-            'date' => ['required'],
-            'employee' => ['required'],
+            'date_id' => ['required'],
+            'employees_id' => ['required'],
             'time_in' => ['required']
         ]);
 

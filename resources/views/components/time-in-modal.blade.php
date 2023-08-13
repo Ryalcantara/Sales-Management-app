@@ -1,6 +1,6 @@
 
 <!-- Small Modal -->
-<div id="small-modal_{{ $employee->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="small-modal_{{ $employee->employees_id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-md max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -20,8 +20,8 @@
             <div class="p-6 space-y-6">
                 <form action="/timeLog" method="post">
                     @csrf
-                    <input type="hidden" name="date" value="{{ date('m/d/Y') }}">
-                    <input type="hidden" name="employee" value="{{ $employee->employees_id }}">
+                    <input type="hidden" name="date_id" value="{{ date('m/d/Y') }}">
+                    <input type="hidden" name="employees_id" value="{{ $employee->employees_id }}">
                     <input type="hidden" name="time_in" value="{{ date(' h:i:s a') }}">
                 <p class="text-center">{{ $employee->name }} is logging in at:</p>
                 <br>

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('time_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('date');
-            $table->string('employee');
+            $table->string('date_id');
+            $table->string('employees_id');
             $table->string('time_in');
             $table->string('time_out')->nullable();
             $table->timestamps();
