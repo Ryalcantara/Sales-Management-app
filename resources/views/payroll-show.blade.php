@@ -105,14 +105,15 @@
                                     {{ $payroll->name }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $payroll->productsAmount }}
+                                    {{ $payroll->standardPay }}
                                     
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $payroll->servicesAmount }}
+                                    {{ $payroll->totalAmountServices }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $payroll->productsAmount }}
+                                    {{ $payroll->totalAmountProducts
+                                         }}
                                 </td>
                                 <td class="px-6 py-4 text-right">
 
