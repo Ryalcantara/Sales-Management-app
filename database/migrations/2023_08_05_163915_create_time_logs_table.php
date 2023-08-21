@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('employees_id');
             $table->string('time_in');
             $table->string('time_out')->nullable();
+            $table->integer('total_hours')->nullable();
+            $table->integer('total_minutes')->nullable();
             $table->timestamps();
         });
     }

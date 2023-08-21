@@ -64,8 +64,8 @@
                                 @include('components.edit_delete-products')
 
                         </td>
-                        @endforeach
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

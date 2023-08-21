@@ -15,25 +15,25 @@ class TimeLogController extends Controller
     public function index()
     {
         $data = DB::table('time_logs')
-        ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
-        ->get();
+            ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+            ->get();
         return view('timeLog', ['time' => $data])
-        ->with('employees', Employees::all());
+            ->with('employees', Employees::all());
     }
 
     public function index2()
     {
         $data = DB::table('time_logs')
-        ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
-        ->get();
+            ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+            ->get();
         return view('timeLog', ['time' => $data])
-        ->with('employees', Employees::all());
+            ->with('employees', Employees::all());
     }
     public function index3()
     {
         $data = DB::table('time_logs')
-        ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
-        ->get();
+            ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+            ->get();
         return view('time', ['time' => $data]);
     }
 
@@ -45,7 +45,7 @@ class TimeLogController extends Controller
         $validated = $request->validate([
             'date_id' => ['required'],
             'employees_id' => ['required'],
-            'time_in' => ['required']
+            'time_out' => ['required']
         ]);
 
         TimeLog::create($validated);
@@ -54,10 +54,8 @@ class TimeLogController extends Controller
         $data = Employees::all();
 
         return redirect('/timeRedirect')
-        ->with('time', TimeLog::all())
-        ->with('employees', Employees::all());
-
-
+            ->with('time', TimeLog::all())
+            ->with('employees', Employees::all());
     }
 
     /**
@@ -87,9 +85,42 @@ class TimeLogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        // DB::table('time_logs')
+        //     ->where('id', $request->id)
+        //     ->update(['time_out' => $request->time_out]);
+
+
+        $data = DB::table('time_logs')
+            ->where('id', $request->id)
+            ->first(); // Retrieve the data
+
+        if ($data) {
+            $timeIn = strtotime($data->time_in);
+            $timeOut = strtotime($request->time_out);
+
+            $hoursWorked = floor(($timeOut - $timeIn) / 3600); // Calculate hours worked
+            $minutesWorked = round((($timeOut - $timeIn) % 3600) / 60); // Calculate remaining minutes
+
+            DB::table('time_logs')
+                ->where('id', $request->id)
+                ->update([
+                    'time_out' => $request->time_out,
+                    'total_hours' => $hoursWorked,
+                    'total_minutes' => $minutesWorked, // Update total_minutes field
+                ]);
+
+            // Optionally, you might want to refresh the $data variable with the updated data
+            $data = DB::table('time_logs')
+                ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+                ->where('id', $request->id)
+                ->first();
+        }
+
+        return redirect('/timeRedirect')
+            ->with('time', TimeLog::all())
+            ->with('employees', Employees::all());
     }
 
     /**

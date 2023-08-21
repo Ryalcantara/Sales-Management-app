@@ -100,11 +100,11 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <button data-modal-target="small-modal"
-                                        data-modal-toggle="small-modal_{{ $employee->employees_id }}" type="button"
+                                        data-modal-toggle="time_out_{{ $times->id }}" type="button"
                                         class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Time
                                         Out</button>
-                                    @include('components.time-in-modal')
+                                    @include('components.time-out-modal')
                                 </td>
                             </tr>
                         @endif
@@ -135,6 +135,9 @@
                     <th scope="col" class="px-6 py-3">
                         Time Out
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Total Time Rendered
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -155,6 +158,10 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $times->time_out }}
+
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $times->total_hours }} hours and {{ $times->total_minutes }} minutes
 
                                 </td>
                             </tr>

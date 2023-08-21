@@ -110,6 +110,7 @@ Route::get('/time', [TimeLogController::class, 'index3']);
 Route::get('/', [TimeLogController::class, 'index']);
 Route::get('/timeRedirect', [TimeLogController::class, 'index2']);
 Route::post('/timeLog', [TimeLogController::class, 'create']);
+Route::put('/timeLog', [TimeLogController::class, 'update']);
 
 
 
