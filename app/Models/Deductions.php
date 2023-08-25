@@ -10,7 +10,7 @@ class Deductions extends Model
 
     protected $fillable = [
         'date_id',
-        'employee',
+        'employees_id',
         'amount',
     ];
     

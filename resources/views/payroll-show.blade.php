@@ -116,7 +116,24 @@
                                          }}
                                 </td>
                                 <td class="px-6 py-4 text-right">
-
+                                    {{ $payroll->grossPay
+                                    }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    {{ $payroll->lateMinutes
+                                    }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    {{ $payroll->cashAdvance
+                                    }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    {{ $payroll->totalDeduction
+                                    }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    {{ $payroll->netPay
+                                    }}
                                 </td>
                             </tr>
                         @endforeach

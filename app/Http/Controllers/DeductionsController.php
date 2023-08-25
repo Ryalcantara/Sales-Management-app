@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deductions;
+use App\Models\Employees;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DeductionsController extends Controller
 {
@@ -12,9 +14,12 @@ class DeductionsController extends Controller
      */
     public function index()
     {
-        $data = Deductions::all();
+        $data = DB::table('deductions')
+        ->join('employees', 'deductions.employees_id', '=', 'employees.employees_id')
+        ->get();
 
-        return view('deductions', ['deductions' => $data]);
+        return view('deductions', ['deductions' => $data])
+        ->with('employees', Employees::all());
     }
 
     /**
@@ -24,7 +29,7 @@ class DeductionsController extends Controller
     {
         $validated = $request->validate([
             'date_id'=> ['required'],
-            'employee'=> ['required'],
+            'employees_id'=> ['required'],
             'amount'=> ['required'],
         ]);
 

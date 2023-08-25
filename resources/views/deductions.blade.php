@@ -10,7 +10,7 @@
         type="button">
         Add Deductions</button>
 
-    <x-add-deductions-modal />
+    @include('components.add-deductions-modal')
 
     @php
         $array = array();;
@@ -42,7 +42,7 @@
                             @foreach ($deductions as $deduction)
                                 
                             <td class="p-4">{{ $deduction->date_id }}</td>
-                            <td class="p-4">{{ $deduction->employee }}</td>
+                            <td class="p-4">{{ $deduction->name }}</td>
                             <td class="p-4">{{ $deduction->amount }}</td>
                             <td class="p-4">
                                 <a href="#" type="button"

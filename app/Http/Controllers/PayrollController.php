@@ -174,53 +174,82 @@ class PayrollController extends Controller
                             }
                         }
                     }
-                                $totalAmountServices += $salesData->sum('services_amount');
-                                
-                                
-                                // Calculate standardpay from time_logs
-                                $timeLogData = DB::table('time_logs')
-                                ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
-                                ->where('time_logs.employees_id', $employee->employees_id)
-                                // ->where('time_logs.date_id', $currentDate) // Filter by current date
-                                ->whereBetween('date_id', [$request->start, $request->end])
-                                
-                                ->sum('rate');
-                                
-                                $standardPay = $timeLogData * 7;
-                                
-                                // Calculate totalAmount for products only if quota is reached for the day
-                                $productAmount = DB::table('sales')
-                                ->join('products', 'sales.product_id', '=', 'products.product_id')
-                                // ->where('sales.date_id', $request->start ) // Filter by current date
+                    $totalAmountServices += $salesData->sum('services_amount');
+
+
+                    // Calculate standardpay from time_logs
+                    $timeLogData = DB::table('time_logs')
+                        ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+                        ->where('time_logs.employees_id', $employee->employees_id)
+                        // ->where('time_logs.date_id', $currentDate) // Filter by current date
                         ->whereBetween('date_id', [$request->start, $request->end])
 
+                        ->sum('rate');
+
+                    $standardPay = $timeLogData * 7;
+
+                    // Calculate totalAmount for products only if quota is reached for the day
+                    $productAmount = DB::table('sales')
+                        ->join('products', 'sales.product_id', '=', 'products.product_id')
+                        // ->where('sales.date_id', $request->start ) // Filter by current date
+                        ->whereBetween('date_id', [$request->start, $request->end])
                         ->select(
                             DB::raw('SUM(products.price) as products_amount'),
-                            )
-                            ->get();
-                            
-                            $totalAmountProducts = 0;
-                            if ($productAmount->sum('products_amount') >= 8000) {
-                                $totalAmountProducts += $productAmount->sum('products_amount') * 0.20;
-                            }
-                            
-                            // Assign the calculated values to the employee object
-                            $employee->totalAmountProducts = $totalAmountProducts;
-                            $employee->totalAmountServices = $totalAmountServices;
-                            $employee->standardPay = $standardPay;
-                            
-                            // Move to the next day
-                            $currentDate = date('m/d/Y', strtotime('+1 day', strtotime($currentDate)));
-                            // echo $currentDate . "<br>";
-                            // echo $salesData->sum('services_amount') . "<br> ";
-                            // dd($currentDate);        
+                        )
+                        ->get();
+
+
+
+                    $lateMinutes = 0;
+                    $isAbsent = DB::table('time_logs')
+                        ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+                        ->where('time_logs.employees_id', $employee->employees_id)
+                        ->where('date_id', $currentDate)
+                        ->count() == 0;
+
+                    if (!$isAbsent) {
+                        // Calculate total minutes worked for the day
+                        $totalWorkedMinutes = DB::table('time_logs')
+                            ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+                            ->where('time_logs.employees_id', $employee->employees_id)
+                            ->where('date_id', $currentDate)
+                            ->sum(DB::raw('total_hours * 60 + total_minutes'));
+
+                        if ($totalWorkedMinutes < 420) {
+
+                            $lateMinutes = max(0, 420 - $totalWorkedMinutes);
                         }
                     }
-        }
-   
-        
 
-        
+                    $cashAdvance = DB::table('deductions')
+                        ->join('employees', 'deductions.employees_id', '=', 'employees.employees_id')
+                        ->where('deductions.employees_id', $employee->employees_id)
+                        ->whereBetween('date_id', [$request->start, $request->end])
+                        ->sum('amount');
+
+                    $totalAmountProducts = 0;
+                    if ($productAmount->sum('products_amount') >= 8000) {
+                        $totalAmountProducts += $productAmount->sum('products_amount') * 0.20;
+                    }
+
+                    // Assign the calculated values to the employee object
+                    $employee->totalDeduction = $cashAdvance + ($lateMinutes + $standardPay);
+                    $employee->netPay = ($cashAdvance + ($lateMinutes + $standardPay)) - ($standardPay + $totalAmountServices + $totalAmountProducts); 
+                    $employee->cashAdvance = $cashAdvance;
+                    $employee->lateMinutes = $lateMinutes;
+                    $employee->totalAmountProducts = $totalAmountProducts;
+                    $employee->totalAmountServices = $totalAmountServices;
+                    $employee->standardPay = $standardPay;
+                    $employee->grossPay = $standardPay + $totalAmountServices + $totalAmountProducts;
+
+                    // Move to the next day
+                    $currentDate = date('m/d/Y', strtotime('+1 day', strtotime($currentDate)));
+                }
+            }
+        }
+
+
+
 
         return view('payroll-show', ['payrolls' => $employees]);
     }

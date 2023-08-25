@@ -45,13 +45,12 @@ class TimeLogController extends Controller
         $validated = $request->validate([
             'date_id' => ['required'],
             'employees_id' => ['required'],
-            'time_out' => ['required']
+            'time_in' => ['required']
         ]);
 
         TimeLog::create($validated);
 
 
-        $data = Employees::all();
 
         return redirect('/timeRedirect')
             ->with('time', TimeLog::all())
