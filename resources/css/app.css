@@ -2,8 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
+/* @import '' */
 
 
 /* // add the code bellow */
@@ -21,3 +20,62 @@
       }
     }
   }
+
+
+*{
+  font-family: 'JetBrains Mono';
+
+}
+
+
+
+
+
+
+
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    text-decoration: none;
+    color: #666;
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.sidebar-link::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #db5427;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+}
+
+.sidebar-link:hover::before {
+    opacity: 0.1;
+}
+
+.sidebar-link:hover {
+    background-color: #f3f4f6;
+    color: #000;
+}
+
+.sidebar-link.active {
+    background-color: white;
+    color: #cf6721;
+    border-left: 3px solid #e1426c;
+}
+
+.sidebar-link.active::before {
+    opacity: 0.2;
+}

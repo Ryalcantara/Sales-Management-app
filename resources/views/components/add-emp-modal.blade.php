@@ -17,7 +17,7 @@
             </button>
             <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Add Employee</h3>
-                <form action="add-emp" method="POST">
+                <form action="/employees/add-emp" method="POST">
                     @csrf
                     {{-- <div class="relative z-0 w-full mb-6 group">
                         <input name="id"

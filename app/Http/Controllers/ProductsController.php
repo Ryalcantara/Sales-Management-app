@@ -64,7 +64,6 @@ class ProductsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $product = Products::findOrFail($request->input('id'));
         $validated = $request->validate([
             'product_name'=> ['required'],
             'batch_number'=> ['required'],
@@ -73,10 +72,12 @@ class ProductsController extends Controller
             'quantity'=> ['required'],
             'availability'=> ['required'],
         ]);
-
+        
+        $product = Products::findOrFail($request->input('id'));
         $product->update($validated);
 
         return back();
+
     }
 
     /**
@@ -84,6 +85,11 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Products::findOrFail($id);
+        $product->delete();
+
+        $data = Products::all();
+
+        return view('products', ['products' => $data]);
     }
 }

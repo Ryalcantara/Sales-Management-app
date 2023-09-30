@@ -34,7 +34,9 @@ class TimeLogController extends Controller
         $data = DB::table('time_logs')
             ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
             ->get();
-        return view('time', ['time' => $data]);
+        return view('time', ['time' => $data])
+        ->with('employees', Employees::all());
+        ;
     }
 
     /**

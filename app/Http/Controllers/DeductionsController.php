@@ -68,7 +68,24 @@ class DeductionsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $deductions = Deductions::findOrFail($request->input('id'));
+        $validated = $request->validate([
+            'employees_id'=> ['required'],
+            'amount'=> ['required'],
+        ]);
+
+        $deductions->update($validated);
+
+        
+        return back();
+
+
+        // $data = DB::table('deductions')
+        // ->join('employees', 'deductions.employees_id', '=', 'employees.employees_id')
+        // ->get();
+
+        // return view('deductions', ['deductions' => $data])
+        // ->with('employees', Employees::all());
     }
 
     /**
@@ -76,6 +93,14 @@ class DeductionsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $deduction = Deductions::findOrFail($id);
+        $deduction->delete();
+
+        $data = DB::table('deductions')
+        ->join('employees', 'deductions.employees_id', '=', 'employees.employees_id')
+        ->get();
+
+        return view('deductions', ['deductions' => $data])
+        ->with('employees', Employees::all());
     }
 }

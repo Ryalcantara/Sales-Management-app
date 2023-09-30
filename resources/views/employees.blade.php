@@ -1,6 +1,12 @@
 @include('partials.header')
 @include('partials.sidebar')
-<div class="p-8 sm:ml-60 mt-10">
+@include('partials.links1')
+<div class="p-8 sm:ml-60">
+    @include('partials.topbar')
+    <div style="margin-top: -30px">
+        <br>
+        <br>
+        <br>
 
 
 
@@ -12,9 +18,6 @@
 
     <x-add-emp-modal />
 
-    @php
-        $array = [];
-    @endphp
 
 
 
@@ -39,38 +42,40 @@
                 <tbody>
                     @foreach ($employees as $employee)
                         @php
-                            $array = ['id' => $employee->id];
+                            $array = ['id' => $employee->employees_id, 'name' => $employee->name, 'email' => $employee->email, 'address' => $employee->address, 'contact' => $employee->contact, 'rate' => $employee->rate, 'position' => $employee->position];
                         @endphp
                         <tr>
                             <td class="p-4">{{ $employee->name }}</td>
                             <td class="p-4">{{ $employee->role }}</td>
                             <td class="p-4">
-                                <a data-drawer-target="drawer-right_{{ $employee->id }}"
-                                    data-drawer-show="drawer-right_{{ $employee->id }}" data-drawer-placement="right"
-                                    aria-controls="drawer-right_{{ $employee->id }}" type="button"
-                                    class="text-gray-700 border border-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-gray-500 dark:text-dark-500 dark:hover:text-white dark:focus:ring-gray-800 dark:hover:bg-gray-500">
+                                <button data-drawer-target="drawer-right_{{ $employee->employees_id }}"
+                                    data-drawer-show="drawer-right_{{ $employee->employees_id }}"
+                                    data-drawer-placement="right"
+                                    aria-controls="drawer-right_{{ $employee->employees_id }}" type="button"
+                                    class="text-white bg-indigo-500 hover:bg-indigo-500 focus:ring-4 focus:outline-none focus:ring-indigo-500 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-indigo-500 dark:hover:bg-indigo-500 dark:focus:ring-indigo-500">
                                     <span>
                                         <i class="fa-solid fa-eye"></i>
                                     </span>
-                                </a>
-                                @include('components.employee-profile')
+                                </button>
                                 <button type="button" data-modal-target="popup-modal"
-                                    data-modal-toggle="popup-modal_{{ $employee->id }}"
-                                    class="text-red-700 border border-red-700 hover:bg-red-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800 dark:hover:bg-red-500">
+                                    data-modal-toggle="popup-modal_{{ $employee->employees_id }}"
+                                    class="text-white bg-pink-600 hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-600 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-pink-600 dark:hover:bg-pink-600 dark:focus:ring-pink-600">
                                     <span>
                                         <i class="fa-solid fa-trash"></i>
                                     </span>
                                 </button>
                                 @include('components.warning-modal')
+
                             </td>
                         </tr>
-
+                        <x-edit-employee-modal :data="$array" />
+                        @include('components.employee-profile')
+                    @endforeach
                 </tbody>
-                @endforeach
             </table>
         </div>
     </div>
-
+</div>
 </div>
 
 

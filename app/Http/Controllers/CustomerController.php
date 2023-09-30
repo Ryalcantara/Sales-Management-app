@@ -62,7 +62,6 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //    dd($request);
            $customers = Customers::findOrFail($request->input('id'));
            $validated = $request->validate([
                'customer_name'=> ['required'],
@@ -80,6 +79,11 @@ class CustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Customers::findOrFail($id);
+        $product->delete();
+
+        $data = Customers::all();
+
+        return view('/customers', ['customers' => $data]);
     }
 }

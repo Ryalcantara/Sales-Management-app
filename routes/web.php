@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeductionsController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExpensesController;
@@ -33,9 +34,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/index', function (){
-    return view('index');
-});
+Route::get('/index', [DashboardController::class, 'index']);
 
 
 
@@ -46,7 +45,7 @@ Route::get('/index', function (){
 Route::get('/employees', [EmployeeController::class, 'index']);
 
 // add employee
-Route::post('/add-emp', [EmployeeController::class, 'create']);
+Route::post('/employees/add-emp', [EmployeeController::class, 'create']);
 
 // view employee
 Route::get('/view_employee/{id}', [EmployeeController::class, 'show']);
@@ -72,18 +71,23 @@ Route::get('/customers', [CustomerController::class, 'index']);
 Route::post('/add-customer', [CustomerController::class, 'create']);
 // EDIT CUSTOMERS
 Route::put('/customers/{id}', [CustomerController::class, 'update']);
+// EDIT CUSTOMERS
+Route::delete('/customers/{id}', [CustomerController::class, 'destroy']);
 
 
 // deductions
 Route::get('/deductions', [DeductionsController::class, 'index']);
 
 Route::post('/deductions', [DeductionsController::class, 'create']);
+Route::put('/deductions/{id}', [DeductionsController::class, 'update']);
+Route::delete('/deductions/{id}', [DeductionsController::class, 'destroy']);
 
 
 // products
 Route::get('/products', [ProductsController::class, 'index']);
 Route::post('/products', [ProductsController::class, 'create']);
 Route::put('/products/{id}', [ProductsController::class, 'update']);
+Route::delete('/products/{id}', [ProductsController::class, 'destroy']);
 
 
 
@@ -97,11 +101,17 @@ Route::get('/backup', function () {
 // SERVICES
 Route::get('/services', [ServicesController::class, 'index']);
 Route::post('add-services', [ServicesController::class, 'create']);
+Route::put('services/{id}', [ServicesController::class, 'update']);
+Route::delete('services/{id}', [ServicesController::class, 'destroy']);
 
 
 // Pending Sales
 Route::get('/pending_sales', [PendingController::class, 'index']);
 Route::post('/add-pending', [PendingController::class, 'create']);
+Route::post('/add-pending-without-customer', [PendingController::class, 'create2']);
+Route::put('/pending_sales/{id}', [PendingController::class, 'update']);
+Route::delete('/pendings/{id}', [PendingController::class, 'destroy']);
+
 Route::get('/submit', [PendingController::class, 'submit']);
 
 
@@ -115,6 +125,7 @@ Route::put('/timeLog', [TimeLogController::class, 'update']);
 
 
 Route::get('/sales', [SalesController::class, 'index']);
+Route::delete('/sales/{id}', [SalesController::class, 'destroy']);
 
 
 

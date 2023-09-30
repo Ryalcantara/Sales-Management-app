@@ -17,9 +17,9 @@ class SalesController extends Controller
         ->join('employees', 'sales.employees_id', '=', 'employees.employees_id')
         ->join('services', 'sales.service_id', '=', 'services.service_id')
         ->join('products', 'sales.product_id', '=', 'products.product_id')
-        ->get();
+        ->paginate(4);
 
-        return view('sales', ['sales' => $data]);
+        return view('sales', compact('data'));
     }
 
     /**
@@ -67,6 +67,15 @@ class SalesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $sales = Sales::findOrFail($id);
+        $sales->delete();
+
+        $data = DB::table('sales')
+        ->join('employees', 'sales.employees_id', '=', 'employees.employees_id')
+        ->join('services', 'sales.service_id', '=', 'services.service_id')
+        ->join('products', 'sales.product_id', '=', 'products.product_id')
+        ->get();;
+
+        return view('/sales', ['sales' => $data]);
     }
 }

@@ -1,7 +1,13 @@
 @include('partials.header')
 @include('partials.sidebar')
-<div class="p-8 sm:ml-60 mt-10">
+@include('partials.links1')
 
+<div class="p-8 sm:ml-60">
+    @include('partials.topbar')
+    <div style="margin-top: -30px">
+        <br>
+        <br>
+        <br>
     <div class="w-full  rounded-lg p-4">
 
         <div>
@@ -31,13 +37,13 @@
                 </thead>
                 <tbody>
                     @foreach ($time as $times)
-                    @if($times->date == date('m/d/Y'))    
+                    @if($times->date_id == date('m/d/Y'))    
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $times ->date }}
+                            {{ $times ->date_id }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $times ->employee }}
+                            {{ $times ->name }}
                             
                         </td>
                         <td class="px-6 py-4">
@@ -56,7 +62,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 
 

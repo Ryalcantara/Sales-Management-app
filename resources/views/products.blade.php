@@ -1,7 +1,12 @@
 @include('partials.header')
 @include('partials.sidebar')
-<div class="p-8 sm:ml-60 mt-10">
-
+@include('partials.links2')
+<div class="p-8 sm:ml-60">
+    @include('partials.topbar')
+    <div style="margin-top: -30px">
+        <br>
+        <br>
+        <br>
       <!-- Modal toggle -->
       <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
       class="text-gray-900 shadow-md sm:rounded-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
@@ -45,18 +50,18 @@
                         <td class="p-4">{{ $product->availability }}</td>
                         <td class="p-4">
 
-                            <a href="#" type="button"
-                                data-modal-target="edit-modal"
-                                    data-modal-toggle="edit-modal_{{ $product->id }}"
-                                    class="text-green-700 border border-green-700 hover:bg-green-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:focus:ring-green-800 dark:hover:bg-green-500">
+                            <button  type="button"
+                                data-modal-target="edit-modal_{{ $product->product_id }}"
+                                    data-modal-toggle="edit-modal_{{ $product->product_id }}"
+                                    class="text-white bg-indigo-500 hover:bg-indigo-500 focus:ring-4 focus:outline-none focus:ring-indigo-500 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-indigo-500 dark:hover:bg-indigo-500 dark:focus:ring-indigo-500">
                                     <span>
-                                        <i class="fa-solid fa-eye"></i>
+                                        <i class="fa-solid fa-pen-to-square"></i>
                                     </span>
-                                </a>
+                                </button>
                                 <button type="button" 
-                                data-modal-target="delete-modal"
-                                data-modal-toggle="delete-modal_{{ $product->id }}"
-                                    class="text-red-700 border border-red-700 hover:bg-red-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800 dark:hover:bg-red-500">
+                                data-modal-target="delete-modal_{{ $product->product_id }}"
+                                data-modal-toggle="delete-modal_{{ $product->product_id }}"
+                                    class="text-white bg-pink-600 hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-600 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-pink-600 dark:hover:bg-pink-600 dark:focus:ring-pink-600">
                                     <span>
                                         <i class="fa-solid fa-trash"></i>
                                     </span>
@@ -71,7 +76,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 
 

@@ -1,70 +1,37 @@
 @include('partials.header')
 @include('partials.sidebar')
-<div class="p-8 sm:ml-60 mt-10">
+<div class="p-8 sm:ml-60 mt-10" style="display: relative">
+    <div class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 font-sans">
 
-
-
-    <!-- Modal toggle -->
-    <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-        class="text-gray-900 shadow-md sm:rounded-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-        type="button">
-        Add Deductions</button>
-
-    <x-add-emp-modal />
-
-    @php
-        $array = array();;
-    @endphp
-
-
-
-    <div class="w-full -blur-sm  rounded-lg p-4">
-
-        <div>
-            <h4>Deductions</h4>
+        <div class="container mx-auto my-8 p-8 bg-white rounded-lg shadow-lg">
+    
+            <!-- Backup Section -->
+            <div class="mb-8 p-6 bg-blue-200 rounded-lg">
+                <h2 class="text-3xl font-semibold text-blue-800 mb-4">Backup Database <i class="fas fa-database"></i></h2>
+                <form>
+                    <div class="flex items-center mb-4">
+                        <label for="backup-name" class="mr-2 text-blue-800">Backup Name:</label>
+                        <input type="text" id="backup-name" name="backup-name" class="p-2 border rounded">
+                    </div>
+                    <button type="submit" class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-700 transition duration-300"><i class="fas fa-save"></i> Backup</button>
+                </form>
+            </div>
+    
+            <!-- Restore Section -->
+            <div class="p-6 bg-green-200 rounded-lg">
+                <h2 class="text-3xl font-semibold text-green-800 mb-4">Restore Database <i class="fas fa-upload"></i></h2>
+                <form>
+                    <div class="flex items-center mb-4">
+                        <label for="restore-file" class="mr-2 text-green-800">Backup File:</label>
+                        <input type="file" id="restore-file" name="restore-file" class="p-2 border rounded">
+                    </div>
+                    <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-700 transition duration-300"><i class="fas fa-undo"></i> Restore</button>
+                </form>
+            </div>
+    
         </div>
-        <hr>
-
-
-        <div class="overflow-x-auto shadow-md sm:rounded-lg mt-6">
-
-            <table class="w-full text-sm text-left text-gray-800">
-                <thead>
-                    <tr>
-                        <th class="p-4">Date</th>
-                        <th class="p-4">Category</th>
-                        <th class="p-4">Payments</th>
-                        <th class="p-4">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        <tr>
-                            <td class="p-4"></td>
-                            <td class="p-4"></td>
-                            <td class="p-4"></td>
-                            <td class="p-4">
-                                <a href="#" type="button"
-                                    class="text-green-700 border border-green-700 hover:bg-green-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:focus:ring-green-800 dark:hover:bg-green-500">
-                                    <span>
-                                        <i class="fa-solid fa-eye"></i>
-                                    </span>
-                                </a>
-                                <button type="button" 
-                                    class="text-red-700 border border-red-700 hover:bg-red-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800 dark:hover:bg-red-500">
-                                    <span>
-                                        <i class="fa-solid fa-trash"></i>
-                                    </span>
-                                </button>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
-            </table>
-        </div>
+    
     </div>
-
-</div>
-
-
-
+    </div>
+    
 @include('partials.footer')

@@ -62,7 +62,22 @@ class ServicesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'service_name'=> ['required'],
+            'category'=> ['required'],
+            'amount'=> ['required'],
+        ]);
+
+        $services = Services::findOrFail($request->input('id'));
+        $services->update($validated);
+
+        $data = Services::all();
+
+        return view('services', ['services' => $data]);
+        
+        
+
+       
     }
 
     /**
@@ -70,6 +85,12 @@ class ServicesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $service = Services::findOrFail($id);
+        $service->delete();
+
+        $data = Services::all();
+
+        return view('services', ['services' => $data]);
+        
     }
 }

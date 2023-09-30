@@ -1,7 +1,12 @@
 @include('partials.header')
 @include('partials.sidebar')
-<div class="p-8 sm:ml-60 mt-10">
-
+@include('partials.links2')
+<div class="p-8 sm:ml-60">
+    @include('partials.topbar')
+    <div style="margin-top: -30px">
+        <br>
+        <br>
+        <br>
 
 
     <!-- Modal toggle -->
@@ -13,7 +18,7 @@
     <x-add-services-modal />
 
     @php
-        $array = array();;
+        $array = [];
     @endphp
 
 
@@ -38,22 +43,44 @@
                     </tr>
                 </thead>
                 <tbody>
-                   
+
                     @foreach ($services as $service)
-                    <tr>
+                        <tr>
                             <td class="p-4">{{ $service->service_name }}</td>
                             <td class="p-4">{{ $service->category }}</td>
                             <td class="p-4">{{ $service->amount }}</td>
                             <td class="p-4">
-                            
+                                <div class="flex">
+
+                                    <button data-modal-target="edit_service_{{ $service->service_id }}"
+                                        data-modal-toggle="edit_service_{{ $service->service_id }}"
+                                        aria-controls="edit_service_{{ $service->service_id }}" type="button"
+                                        class="text-white bg-indigo-500 hover:bg-indigo-500 focus:ring-4 focus:outline-none focus:ring-indigo-500 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-indigo-500 dark:hover:bg-indigo-500 dark:focus:ring-indigo-500">
+                                        <span>
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </span>
+                                    </button>
+                                    @include('components.edit_service')
+                                    <button type="button" data-modal-target="popup-modal"
+                                        data-modal-toggle="popup-modal_{{ $service->service_id }}"
+                                        class="text-white bg-pink-600 hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-600 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-pink-600 dark:hover:bg-pink-600 dark:focus:ring-pink-600">
+                                        <span>
+                                            <i class="fa-solid fa-trash"></i>
+                                        </span>
+                                    </button>
+                                    @include('components.delete_service')
+
+                                </div>
                             </td>
                         </tr>
+
                     @endforeach
 
-                        
-                    </tbody>
+
+                </tbody>
             </table>
         </div>
+    </div>
     </div>
 
 </div>

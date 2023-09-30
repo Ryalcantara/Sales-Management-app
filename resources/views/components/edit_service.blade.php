@@ -1,5 +1,5 @@
 <!-- Main modal -->
-<div id="authentication-modal" tabindex="-1" aria-hidden="true"
+<div id="edit_service_{{ $service->service_id }}" tabindex="-1" aria-hservice_den="true"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-md max-h-full">
         <!-- Modal content -->
@@ -16,15 +16,22 @@
                 <span class="sr-only">Close modal</span>
             </button>
             <div class="px-6 py-6 lg:px-8">
-                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Add Services</h3>
-                <form action="/add-services" method="POST">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Edit Services</h3>
+                <form action="/services/{{ $service->service_id }}" method="POST">
+                    @method('PUT')
                     @csrf
 
+                    <input name="id"
+                    type="hidden"
+                    value="{{ $service->service_id }}"
+                    required>
 
                     <div class="relative z-0 w-full mb-6 group">
                         <input name="service_name"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholder=" " required>
+                            placeholder=" " 
+                            value="{{ $service->service_name }}"
+                            required>
                         <label
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Service
                             Name:</label>
@@ -46,7 +53,10 @@
                     <div class="relative z-0 w-full mb-6 group">
                         <input type="number"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            name="amount" placeholder=" " required>
+                            name="amount" placeholder=" "
+                            value="{{ $service->amount }}"
+                            
+                            required>
                         <label
                             class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Amount:</label>
                     </div>

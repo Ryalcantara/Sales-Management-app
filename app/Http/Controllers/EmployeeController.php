@@ -68,7 +68,6 @@ class EmployeeController extends Controller
     public function update(Request $request, Employees $employee)
     {
 
-        // dd($request);
         $employee = Employees::findOrFail($request->input('id'));
         $validated = $request->validate([
             'name'=> ['required'],
@@ -90,7 +89,13 @@ class EmployeeController extends Controller
     public function destroy(Request $request, string $id)
     {
         // dd($request);
-        // $id->delete();
 
+
+        $employee = Employees::findOrFail($id);
+        $employee->delete();
+
+        $data = Employees::all();
+
+        return view('/employees', ['employees' => $data]);
     }
 }
