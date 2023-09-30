@@ -1,4 +1,4 @@
-
+bnbu
 
 
 
@@ -24,10 +24,10 @@
             </a>
         </li>
         <li style="margin-top: 2rem">
-            <a href="{{ url('/financial') }}" type="button" class="{{ request()->is('financial')  ? 'bg-gray-200 text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 p-2 rounded-lg' : '' }}"
-                <span><i class="fas fa-cash-register"></i></span>
-                <span class="flex-1 ml-3 whitespace-nowrap">Financial Report</span>
-            </a>
+            <button class="cursor-not-allowed opacity-50" disable>
+                <span><i class="fas fa-cash-register" disable></i></span>
+                <span class="flex-1 ml-3 whitespace-nowrap" disable>Financial Report</span>
+            </button>
         </li>
         
        </ul>

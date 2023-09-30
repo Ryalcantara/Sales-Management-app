@@ -40,9 +40,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($employees as $employee)
+                    @foreach ($data as $employee)
                         @php
-                            $array = ['id' => $employee->employees_id, 'name' => $employee->name, 'email' => $employee->email, 'address' => $employee->address, 'contact' => $employee->contact, 'rate' => $employee->rate, 'position' => $employee->position];
+                            $array = ['id' => $employee->employees_id, 'name' => $employee->name, 'email' => $employee->email, 'address' => $employee->address, 'contact' => $employee->contact, 'rate' => $employee->rate, 'role' => $employee->role];
                         @endphp
                         <tr>
                             <td class="p-4">{{ $employee->name }}</td>
@@ -74,6 +74,30 @@
                 </tbody>
             </table>
         </div>
+        <br>
+        <!-- Pagination -->
+        @if ($data->hasPages())
+        <div>
+
+            <nav class="flex justify-between mt-4">
+                <div class="flex space-x-2">
+                    {{-- Previous Page Link --}}
+                    @if ($data->onFirstPage())
+                    <button class="pagination-btn disabled" disabled>&laquo; Previous</button>
+                    @else
+                        <a href="{{ $data->previousPageUrl() }}" class="pagination-btn">&laquo; Previous</a>
+                    @endif
+
+                    {{-- Next Page Link --}}
+                    @if ($data->hasMorePages())
+                        <a href="{{ $data->nextPageUrl() }}" class="pagination-btn">Next &raquo;</a>
+                        @else
+                        <button class="pagination-btn disabled" disabled>Next &raquo;</button>
+                        @endif
+                    </div>
+                </nav>
+            </div>
+        @endif
     </div>
 </div>
 </div>

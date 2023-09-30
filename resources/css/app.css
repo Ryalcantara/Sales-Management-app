@@ -28,6 +28,23 @@
 }
 
 
+    .pagination-btn {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background-color: #4a90e2; /* Adjust the color as needed */
+        color: #fff;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .pagination-btn:hover {
+        background-color: #4169e1; /* Adjust the hover color as needed */
+    }
+
+    .pagination-btn.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 
 
 

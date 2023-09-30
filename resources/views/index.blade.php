@@ -15,6 +15,8 @@
 
   <canvas id="line-chart" width="900" height="200"></canvas>
 </div>
+
+
 </div>
 
 <script type="text/javascript">

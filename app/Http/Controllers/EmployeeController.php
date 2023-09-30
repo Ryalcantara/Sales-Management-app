@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employees;
+use DB;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class EmployeeController extends Controller
 {
@@ -13,9 +13,12 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $data = Employees::all();
+        // $data = Employees::all();
 
-        return view('/employees', ['employees' => $data]);
+        $data = FacadesDB::table('employees')
+        ->paginate(4);
+
+        return view('/employees', compact('data'));
     }
 
     /**
