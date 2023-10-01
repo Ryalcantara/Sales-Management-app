@@ -72,6 +72,12 @@ Make sure you have the following tools properly installed on your computer:
     git clone https://github.com/Ryotard/Sales-Management-app.git
     ```
 
+2. Change Directory to the project directory
+
+    ```bash
+    cd Sales-Management-app
+    ```
+
 ### Node Setup
 
 3. Install Node dependencies:
