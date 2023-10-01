@@ -48,19 +48,20 @@ Features:
 Make sure you have the following tools properly installed on your computer:
 
 - ## Git
-    ![Time](/screenshots/Git-Icon-1788C.png "Time").
+    <img src="screenshots/Git-Icon-1788C.png" width="200">
 
 - ## Node.js (with NPM)
-    ![Time](/screenshots/540px-Npm-logo.svg.png "Time").
+    <img src="screenshots/540px-Npm-logo.svg.png" width="200">
 
 - ## Composer
-    ![Time](/screenshots/Logo-composer-tutsplus.png "Time").
+    <img src="screenshots/Logo-composer-tutsplus.png" width="200">
+
 
 - ## PHP
-    ![Time](/screenshots/PHP-logo.svg.png "Time").
+    <img src="screenshots/PHP-logo.svg.png" width="200">
 
 - ## Laravel
-    ![Time](/screenshots/1200px-Laravel.svg.png "Time").
+    <img src="screenshots/1200px-Laravel.svg.png" width="200">
 
 
 ## Project Setup/Installation
