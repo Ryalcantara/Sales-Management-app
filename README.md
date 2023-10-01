@@ -122,7 +122,3 @@ Once you've installed all the dependencies, follow these steps:
 ## Contributing
 
 Contribution guidelines for this project follow the standard fork -> feature branch -> pull request workflow. If you want to contribute, please create an appropriate branch following these guidelines.
-
-## Help and Support
-
-For more help and support, please contact us at help@example.com.
