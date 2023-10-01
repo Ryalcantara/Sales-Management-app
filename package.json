@@ -1,4 +1,7 @@
 {
+    "name": "sales-management-app",
+    "productName": "Sales Management App",
+    "version": "1.0.0",
     "private": true,
     "type": "module",
     "scripts": {
@@ -7,6 +10,7 @@
         "watch": "vite build --watch"
     },
     "devDependencies": {
+        "@catppuccin/tailwindcss": "^0.1.6",
         "autoprefixer": "^10.4.14",
         "axios": "^1.1.2",
         "flowbite": "^1.7.0",
@@ -21,3 +25,4 @@
         "chart.js": "^4.4.0"
     }
 }
+    

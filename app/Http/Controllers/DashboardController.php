@@ -25,9 +25,16 @@ class DashboardController extends Controller
             DB::raw('(products.price * sales.quant) as product_total'), // Calculate product total
             'services.amount as service_amount' // Assuming 'amount' is the field representing the service amount
         )
-        ->get();
+        // ->get()
+        ->paginate(2);
+
+
+
+       
+
+        // return view('sales', compact('data'));
     
-    return view('index', compact('data'));
+    return view('/index', compact('data'));
     
     }
 }

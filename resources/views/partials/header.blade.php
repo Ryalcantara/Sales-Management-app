@@ -8,4 +8,4 @@
   <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
 
 </head>
-<body class="bg-white">
+<body class="bg-white border-gray-200 dark:bg-gray-900  dark:text-white">

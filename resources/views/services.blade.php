@@ -1,7 +1,8 @@
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.links2')
-<div class="p-8 sm:ml-60">
+<div class="p-8 ml-80">
+
     @include('partials.topbar')
     <div style="margin-top: -30px">
         <br>
@@ -11,7 +12,7 @@
 
     <!-- Modal toggle -->
     <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-        class="text-gray-900 shadow-md sm:rounded-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
         type="button">
         Add Services</button>
 
@@ -33,7 +34,7 @@
 
         <div class="overflow-x-auto shadow-md sm:rounded-lg mt-6">
 
-            <table class="w-full text-sm text-left text-gray-800">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead>
                     <tr>
                         <th class="p-4">Services</th>

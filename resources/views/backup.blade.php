@@ -1,6 +1,7 @@
 @include('partials.header')
 @include('partials.sidebar')
-<div class="p-8 sm:ml-60 mt-10" style="display: relative">
+<div class="p-8 ml-80">
+
     <div class="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 font-sans">
 
         <div class="container mx-auto my-8 p-8 bg-white rounded-lg shadow-lg">

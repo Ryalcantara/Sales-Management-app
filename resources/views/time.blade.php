@@ -2,7 +2,8 @@
 @include('partials.sidebar')
 @include('partials.links1')
 
-<div class="p-8 sm:ml-60">
+<div class="p-8 ml-80">
+
     @include('partials.topbar')
     <div style="margin-top: -30px">
         <br>

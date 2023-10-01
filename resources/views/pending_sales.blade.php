@@ -1,14 +1,15 @@
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.links1')
-<div class="p-8 sm:ml-60">
+<div class="p-8 ml-80">
+
     @include('partials.topbar')
     <div style="margin-top: -30px">
         <br>
         <br>
         <br>
     <button data-modal-target="queue-modal" data-modal-toggle="queue-modal" type="button"
-        class="text-gray-900 shadow-md sm:rounded-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
         Add Queue Sales</button>
 
     @include('components.queue-modal')
@@ -34,7 +35,7 @@
 
         <div class="overflow-x-auto shadow-md sm:rounded-lg mt-6">
 
-            <table class="w-full text-sm text-left text-gray-800">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead>
                     <tr>
                         <th class="p-4" rowspan="2">Date</th>
@@ -110,7 +111,7 @@
                         <button type="button" data-drawer-target="add_pending_{{ $pending->customer }}"
                             data-drawer-show="add_pending_{{ $pending->customer }}" data-drawer-placement="right"
                             aria-controls="add_pending_{{ $pending->customer }}"
-                            class="text-gray-900 p-10 shadow-md sm:rounded-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Add
+                            class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Add
                             Pending Sales</button>
                         @include('components.add-pending')
                     @endif
@@ -122,7 +123,7 @@
             <div class="m-10 flex flex-row-reverse ">
                 <form action="/submit" method="GET">
                     <button
-                        class="text-gray-900 p-10 shadow-md sm:rounded-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Submit</button>
+                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Submit</button>
                 </form>
             </div>
         </div>

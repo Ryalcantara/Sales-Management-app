@@ -54,3 +54,21 @@ themeToggleBtn.addEventListener('click', function() {
     
 });
 
+
+
+
+// THEME TOGGLE
+ // Get references to the button and both icons
+ const themeToggle = document.getElementById('theme-toggle');
+ const darkIcon = document.getElementById('theme-toggle-dark-icon');
+ const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+ // Add a click event listener to the button
+ themeToggle.addEventListener('click', () => {
+     // Toggle the 'hidden' class on the icons
+     darkIcon.classList.toggle('hidden');
+     lightIcon.classList.toggle('hidden');
+
+     // Add or remove the 'dark' class to the body to toggle the theme
+     document.body.classList.toggle('dark-theme');
+ });
