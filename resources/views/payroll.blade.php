@@ -18,7 +18,7 @@
 
         <div class="overflow-x-auto shadow-md sm:rounded-lg mt-6">
 
-            <form action="/payroll-show" method="post">
+            <form action="/payroll" method="post">
                 @csrf
               
 
@@ -103,22 +103,51 @@
                         </tr>
                     </thead>
                     <tbody>
-                            
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            </th>
-                            <td class="px-6 py-4">
-                            </td>
-                            <td class="px-6 py-4">
-                            </td>
-                            <td class="px-6 py-4">
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                               
-                            </td>
-                        </tr>
+                        @if(isset($payrolls))
+
+                        @foreach ($payrolls as $payroll)
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $payroll->name }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ $payroll->standardPay }}
+                                    
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $payroll->totalAmountServices }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $payroll->totalAmountProducts
+                                         }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    {{ $payroll->grossPay
+                                    }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    {{ $payroll->lateMinutes
+                                    }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    {{ $payroll->cashAdvance
+                                    }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    {{ $payroll->totalDeduction
+                                    }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    {{ $payroll->netPay
+                                    }}
+                                </td>
+                            </tr>
+                        @endforeach
+                        @endif
+                    
+
 
                     </tbody>
                 </table>
@@ -128,7 +157,7 @@
 
 
         </div>
-        </div>
+    </div>
     </div>
 
 

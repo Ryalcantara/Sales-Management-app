@@ -90,7 +90,7 @@ class ServicesController extends Controller
 
         $data = Services::all();
 
-        return view('services', ['services' => $data]);
+        return redirect('/services')->with('services', $data);
         
     }
 }

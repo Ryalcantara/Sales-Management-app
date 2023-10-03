@@ -90,6 +90,6 @@ class ProductsController extends Controller
 
         $data = Products::all();
 
-        return view('products', ['products' => $data]);
+        return redirect('products')->with('deductions', $data);
     }
 }

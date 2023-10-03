@@ -76,6 +76,6 @@ class SalesController extends Controller
         ->join('products', 'sales.product_id', '=', 'products.product_id')
         ->get();;
 
-        return view('/sales', ['sales' => $data]);
+        return redirect('/sales')->with('sales', $data);
     }
 }

@@ -29,7 +29,7 @@ class CustomerController extends Controller
         ]);
 
         Customers::create($validated);
-        return redirect('/customers');
+        return redirect('/customers')->with('data', Customers::all());
     }
 
     /**
@@ -84,6 +84,6 @@ class CustomerController extends Controller
 
         $data = Customers::all();
 
-        return view('/customers', ['customers' => $data]);
+        return redirect('/customers')->with('customers', $data);
     }
 }

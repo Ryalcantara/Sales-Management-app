@@ -40,6 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if(isset($data))
                     @foreach ($data as $employee)
                         @php
                             $array = ['id' => $employee->employees_id, 'name' => $employee->name, 'email' => $employee->email, 'address' => $employee->address, 'contact' => $employee->contact, 'rate' => $employee->rate, 'role' => $employee->role];
@@ -71,6 +72,7 @@
                         <x-edit-employee-modal :data="$array" />
                         @include('components.employee-profile')
                     @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

@@ -6,7 +6,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button type="button"
                 class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                data-modal-hide="authentication-modal">
+                data-modal-hide="edit-modal_{{ $deduction->id }}">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -40,6 +40,7 @@
 
                     <div class="relative z-0 w-full mb-6 group p-4">
                         <button type="button"
+                        data-modal-hide="edit-modal_{{ $deduction->id }}"
                             class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Close</button>
                         <button type="submit"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save
@@ -63,7 +64,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button type="button"
                 class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                data-modal-hide="popup-modal">
+                data-modal-hide="delete-modal_{{ $deduction->id }}">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -82,17 +83,17 @@
                     deduction id number
                     {{ $deduction->id }}?
                 </h3>
-                <div class="flex justify-center">
+                <div class="flex justify-between">
 
                     <form action="/deductions/{{ $deduction->id }}" method="post">
                         @csrf
                         @method('delete')
-                        <button type="submit" data-modal-hide="popup-modal" type="button"
+                        <button type="submit" data-modal-hide="delete-modal_{{ $deduction->id }}" type="button"
                             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                             Yes, I'm sure
                         </button>
                     </form>
-                    <button data-modal-hide="popup-modal" type="button"
+                    <button data-modal-hide="delete-modal_{{ $deduction->id }}" type="button"
                         class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
                         cancel</button>
                 </div>

@@ -66,6 +66,9 @@ class PendingController extends Controller
         
         // Create a new record
         Pending::create($validated);
+
+
+        // Find the first among the column, which case it will retrieve the customer's name
         $record = Pending::first();
         
         return redirect('/pending_sales')
@@ -172,7 +175,8 @@ class PendingController extends Controller
 
         $record = Pending::first();
 
-        return view('/pending_sales', ['pending_sales' => $data])
+        return view('/pending_sales')
+        ->with( ['pending_sales' => $data])
         ->with('customers', Customers::all())
         ->with('employees', Employees::all())
         ->with('services', Services::all())

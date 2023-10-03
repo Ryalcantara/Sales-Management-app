@@ -100,7 +100,8 @@ class DeductionsController extends Controller
         ->join('employees', 'deductions.employees_id', '=', 'employees.employees_id')
         ->get();
 
-        return view('deductions', ['deductions' => $data])
+        return redirect('deductions')
+        ->with('deductions', $data)
         ->with('employees', Employees::all());
     }
 }

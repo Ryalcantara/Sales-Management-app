@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use DB;
+use App\Models\Employees;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB as FacadesDB;
 
@@ -99,6 +99,6 @@ class EmployeeController extends Controller
 
         $data = Employees::all();
 
-        return view('/employees', ['employees' => $data]);
+        return redirect('/employees')->with('data', $data);
     }
 }

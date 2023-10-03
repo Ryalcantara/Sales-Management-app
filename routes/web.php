@@ -62,6 +62,7 @@ Route::delete('/employees/{id}', [EmployeeController::class, 'destroy']);
 Route::get('/expenses', [ExpensesController::class, 'index']);
 Route::post('/add-exp', [ExpensesController::class, 'create']);
 Route::put('/expenses/{id}', [ExpensesController::class, 'update']);
+Route::delete('/expense/{id}', [ExpensesController::class, 'destroy']);
 
 
 
@@ -111,27 +112,30 @@ Route::post('/add-pending', [PendingController::class, 'create']);
 Route::post('/add-pending-without-customer', [PendingController::class, 'create2']);
 Route::put('/pending_sales/{id}', [PendingController::class, 'update']);
 Route::delete('/pendings/{id}', [PendingController::class, 'destroy']);
-
 Route::get('/submit', [PendingController::class, 'submit']);
 
 
-Route::get('/time', [TimeLogController::class, 'index3']);
 
+
+
+
+// Time
+Route::get('/time', [TimeLogController::class, 'index3']);
 Route::get('/', [TimeLogController::class, 'index']);
 Route::get('/timeRedirect', [TimeLogController::class, 'index2']);
 Route::post('/timeLog', [TimeLogController::class, 'create']);
 Route::put('/timeLog', [TimeLogController::class, 'update']);
 
 
-
+// sales
 Route::get('/sales', [SalesController::class, 'index']);
 Route::delete('/sales/{id}', [SalesController::class, 'destroy']);
 
 
 
-
+// payroll
 Route::get('/payroll', [PayrollController::class, 'index']);
-Route::post('/payroll-show', [PayrollController::class, 'daterange']);
+Route::post('/payroll', [PayrollController::class, 'daterange']);
 
 Route::get('/financial', function(){
     return view('financial');
