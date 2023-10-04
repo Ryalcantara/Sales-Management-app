@@ -122,9 +122,8 @@ Route::get('/submit', [PendingController::class, 'submit']);
 // Time
 Route::get('/time', [TimeLogController::class, 'index3']);
 Route::get('/', [TimeLogController::class, 'index']);
-Route::get('/timeRedirect', [TimeLogController::class, 'index2']);
-Route::post('/timeLog', [TimeLogController::class, 'create']);
-Route::put('/timeLog', [TimeLogController::class, 'update']);
+Route::post('/timeCreate', [TimeLogController::class, 'create']);
+Route::put('/timeLog/{id}', [TimeLogController::class, 'update']);
 
 
 // sales

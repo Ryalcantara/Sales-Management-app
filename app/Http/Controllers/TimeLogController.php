@@ -17,18 +17,18 @@ class TimeLogController extends Controller
         $data = DB::table('time_logs')
             ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
             ->get();
-        return view('timeLog', ['time' => $data])
+        return view('/timeLog', ['time' => $data])
             ->with('employees', Employees::all());
     }
 
-    public function index2()
-    {
-        $data = DB::table('time_logs')
-            ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
-            ->get();
-        return view('timeLog', ['time' => $data])
-            ->with('employees', Employees::all());
-    }
+    // public function index2()
+    // {
+    //     $data = DB::table('time_logs')
+    //         ->join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+    //         ->get();
+    //     return view('timeLog', ['time' => $data])
+    //         ->with('employees', Employees::all());
+    // }
     public function index3()
     {
         $data = DB::table('time_logs')
@@ -52,10 +52,11 @@ class TimeLogController extends Controller
 
         TimeLog::create($validated);
 
+        $timeLogs = TimeLog::join('employees', 'time_logs.employees_id', '=', 'employees.employees_id')
+        ->get();
 
-
-        return redirect('/timeRedirect')
-            ->with('time', TimeLog::all())
+        return redirect('/')
+            ->with('time', $timeLogs)
             ->with('employees', Employees::all());
     }
 
@@ -86,17 +87,9 @@ class TimeLogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
-        // DB::table('time_logs')
-        //     ->where('id', $request->id)
-        //     ->update(['time_out' => $request->time_out]);
-
-
-        $data = DB::table('time_logs')
-            ->where('id', $request->id)
-            ->first(); // Retrieve the data
-
+        $data = TimeLog::findOrFail($id);
         if ($data) {
             $timeIn = strtotime($data->time_in);
             $timeOut = strtotime($request->time_out);
@@ -119,9 +112,10 @@ class TimeLogController extends Controller
                 ->first();
         }
 
-        return redirect('/timeRedirect')
+        return redirect('/')
             ->with('time', TimeLog::all())
             ->with('employees', Employees::all());
+
     }
 
     /**
