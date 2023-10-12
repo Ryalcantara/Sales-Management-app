@@ -2,6 +2,7 @@ import './bootstrap';
 import 'flowbite';
 import './datepicker';
 import './chartjs';
+import './ajax';
 
 // window.Chart = Chart;
 

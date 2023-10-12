@@ -20,19 +20,19 @@ class PendingController extends Controller
     public function index()
     {
         $data = DB::table('pendings')
-             ->join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
-             ->join('services', 'pendings.service_id', '=', 'services.service_id')
-             ->join('products', 'pendings.product_id', '=', 'products.product_id')
-             ->get();
+            ->join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
+            ->join('services', 'pendings.service_id', '=', 'services.service_id')
+            ->join('products', 'pendings.product_id', '=', 'products.product_id')
+            ->get();
 
-             $record = Pending::first();
-        
+        $record = Pending::first();
+
         return view('/pending_sales', ['pending_sales' => $data])
-        ->with('customers', Customers::all())
-        ->with('employees', Employees::all())
-        ->with('services', Services::all())
-        ->with('products', Products::all())
-        ->with(compact('record'));
+            ->with('customers', Customers::all())
+            ->with('employees', Employees::all())
+            ->with('services', Services::all())
+            ->with('products', Products::all())
+            ->with(compact('record'));
     }
 
     /**
@@ -52,47 +52,65 @@ class PendingController extends Controller
             'gift_voucher' => ['required'],
             'loyalty' => ['required'],
         ]);
-        
+
         // Find an existing record based on the specified attributes
         $pendingRecord = Pending::where('date_id', $validated['date_id'])
             ->where('customer', $validated['customer'])
             ->first();
-        
+
 
         // If the record exists, delete it
         if ($pendingRecord) {
             $pendingRecord->delete();
         }
-        
+
         // Create a new record
         Pending::create($validated);
+
+        // Update product quantity
+        $product = Products::find($validated['product_id']);
+
+        if ($product) {
+            // Subtract the quantity from the product
+            $product->quantity -= $validated['quant'];
+            $product->save();
+        }
+
 
 
         // Find the first among the column, which case it will retrieve the customer's name
         $record = Pending::first();
-        
+
         return redirect('/pending_sales')
-        ->with(compact('record'));
+            ->with(compact('record'));
     }
 
     public function create2(Request $request)
     {
         $validated = $request->validate([
-            'date_id'=> ['required'],
-            'customer'=> ['required'],
-            'employees_id'=> ['required'],
-            'service_id'=> ['required'],
-            'product_id'=> ['required'],
-            'quant'=> ['required'],
-            'gcash'=> ['required'],
-            'gift_certificate'=> ['required'],
-            'gift_voucher'=> ['required'],
-            'loyalty'=> ['required'],
+            'date_id' => ['required'],
+            'customer' => ['required'],
+            'employees_id' => ['required'],
+            'service_id' => ['required'],
+            'product_id' => ['required'],
+            'quant' => ['required'],
+            'gcash' => ['required'],
+            'gift_certificate' => ['required'],
+            'gift_voucher' => ['required'],
+            'loyalty' => ['required'],
 
         ]);
 
-       
-            Pending::create($validated);
+        // Update product quantity
+        $product = Products::find($validated['product_id']);
+
+        if ($product) {
+            // Subtract the quantity from the product
+            $product->quantity -= $validated['quant'];
+            $product->save();
+        }
+
+        Pending::create($validated);
         return redirect('/pending_sales');
     }
 
@@ -123,41 +141,41 @@ class PendingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        $validated = $request->validate([
-            'id' => ['required'],
-            'date_id' => ['required'],
-            'customer' => ['required'],
-            'employees_id' => ['required'],
-            'service_id' => ['required'],
-            'product_id' => ['required'],
-            'quant' => ['required'],
-            'gcash' => ['required'],
-            'gift_certificate' => ['required'],
-            'gift_voucher' => ['required'],
-            'loyalty' => ['required'],
-        ]);
-        
-        $pending = Pending::findOrFail($request->input('id'));
-        $pending->update($validated);
-        
+    // public function update(Request $request, string $id)
+    // {
+    //     $validated = $request->validate([
+    //         'id' => ['required'],
+    //         'date_id' => ['required'],
+    //         'customer' => ['required'],
+    //         'employees_id' => ['required'],
+    //         'service_id' => ['required'],
+    //         'product_id' => ['required'],
+    //         'quant' => ['required'],
+    //         'gcash' => ['required'],
+    //         'gift_certificate' => ['required'],
+    //         'gift_voucher' => ['required'],
+    //         'loyalty' => ['required'],
+    //     ]);
 
-        $data = DB::table('pendings')
-        ->join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
-        ->join('services', 'pendings.service_id', '=', 'services.service_id')
-        ->join('products', 'pendings.product_id', '=', 'products.product_id')
-        ->get();
+    //     $pending = Pending::findOrFail($request->input('id'));
+    //     $pending->update($validated);
 
-        $record = Pending::first();
 
-        return view('/pending_sales', ['pending_sales' => $data])
-        ->with('customers', Customers::all())
-        ->with('employees', Employees::all())
-        ->with('services', Services::all())
-        ->with('products', Products::all())
-        ->with(compact('record'));
-    }
+    //     $data = DB::table('pendings')
+    //         ->join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
+    //         ->join('services', 'pendings.service_id', '=', 'services.service_id')
+    //         ->join('products', 'pendings.product_id', '=', 'products.product_id')
+    //         ->get();
+
+    //     $record = Pending::first();
+
+    //     return view('/pending_sales', ['pending_sales' => $data])
+    //         ->with('customers', Customers::all())
+    //         ->with('employees', Employees::all())
+    //         ->with('services', Services::all())
+    //         ->with('products', Products::all())
+    //         ->with(compact('record'));
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -165,38 +183,47 @@ class PendingController extends Controller
     public function destroy(string $id)
     {
         $sales = Pending::findOrFail($id);
+
+        // Update product quantity
+        $product = Products::find($sales->quant);
+
+        if ($product) {
+            // Subtract the quantity from the product
+            $product->quantity += $sales['quant'];
+            $product->save();
+        }
         $sales->delete();
 
+
+
         $data = DB::table('pendings')
-        ->join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
-        ->join('services', 'pendings.service_id', '=', 'services.service_id')
-        ->join('products', 'pendings.product_id', '=', 'products.product_id')
-        ->get();
+            ->join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
+            ->join('services', 'pendings.service_id', '=', 'services.service_id')
+            ->join('products', 'pendings.product_id', '=', 'products.product_id')
+            ->get();
+
+
 
         $record = Pending::first();
 
+
+
         return view('/pending_sales')
-        ->with( ['pending_sales' => $data])
-        ->with('customers', Customers::all())
-        ->with('employees', Employees::all())
-        ->with('services', Services::all())
-        ->with('products', Products::all())
-        ->with(compact('record'));
+            ->with(['pending_sales' => $data])
+            ->with('customers', Customers::all())
+            ->with('employees', Employees::all())
+            ->with('services', Services::all())
+            ->with('products', Products::all())
+            ->with(compact('record'));
     }
 
-    
+
     public function submit()
     {
-
-        // $results = DB::table('pending')
-        //      ->join('employees', 'pending.employees_id', '=', 'employees.employees_id')
-        //      ->select('employees.*')
-        //      ->get();
-
         $sourceData = Pending::all();
         foreach ($sourceData as $data) {
             Sales::create([
-                'date_id'=> $data->date_id,
+                'date_id' => $data->date_id,
                 'customer' => $data->customer, // Map columns accordingly
                 'employees_id' => $data->employees_id,
                 'service_id' => $data->service_id,
@@ -209,8 +236,28 @@ class PendingController extends Controller
                 'created_at' => $data->created_at
             ]);
         }
-        
+
         Pending::truncate(); // This will delete all data from the source table
         return redirect('/sales');
+    }
+    public function getProductQuantity(Request $request)
+    {
+        $productId = $request->input('product_id');
+
+
+
+        // Check if $productId is valid
+        if ($productId === null) {
+            return response()->json(['error' => 'Invalid product ID'], 400); // Bad Request
+        }
+
+        $product = Products::find($productId);
+
+        if ($product) {
+            $quantity = $product->quantity;
+            return response()->json(['quantity' => $quantity]);
+        }
+
+        return response()->json(['error' => 'Product not found'], 404);
     }
 }

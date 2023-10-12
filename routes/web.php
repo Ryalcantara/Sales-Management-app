@@ -113,6 +113,9 @@ Route::post('/add-pending-without-customer', [PendingController::class, 'create2
 Route::put('/pending_sales/{id}', [PendingController::class, 'update']);
 Route::delete('/pendings/{id}', [PendingController::class, 'destroy']);
 Route::get('/submit', [PendingController::class, 'submit']);
+// Route::post('/getProductQuantity', [PendingController::class, 'getProductQuantity']);
+Route::post('/getProductQuantity', [PendingController::class, 'getProductQuantity'])->name('getProductQuantity');
+
 
 
 
