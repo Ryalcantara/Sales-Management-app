@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('gift_certificate');
             $table->integer('gift_voucher');
             $table->integer('loyalty');
+            $table->integer('total_amount')->nullable();
             $table->timestamps();
         });
     }

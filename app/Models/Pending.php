@@ -9,7 +9,7 @@ class Pending extends Model
 {
     protected $fillable = [
         'date_id',
-        'customer',
+        'customer_id',
         'employees_id',
         'service_id',
         'product_id',
@@ -17,7 +17,8 @@ class Pending extends Model
         'gcash',
         'gift_certificate',
         'gift_voucher',
-        'loyalty'
+        'loyalty',
+        'total_amount'
     ];
     use HasFactory;
 }

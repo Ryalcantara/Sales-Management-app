@@ -1,6 +1,6 @@
 
 
-  <div id="add_pending_{{ $pending->customer }}"
+  <div id="add_pending_{{ $pending->customer_id }}"
       class="fixed top-0 right-0 z-40 h-screen p-1 overflow-y-auto transition-transform translate-x-full bg-white w-100 dark:bg-gray-800"
       tabindex="-1" aria-labelledby="drawer-right">
       <div class="w-full  rounded-lg p-4">
@@ -10,8 +10,8 @@
 
             <div class="flex justify-center items-center">
 
-                <button type="button" data-drawer-hide="add_pending_{{ $pending->customer }}"
-                    aria-controls="add_pending_{{ $pending->customer }}"
+                <button type="button" data-drawer-hide="add_pending_{{ $pending->customer_id }}"
+                    aria-controls="add_pending_{{ $pending->customer_id }}"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
@@ -32,7 +32,7 @@
               <form action="/add-pending-without-customer" method="POST">
 
                 <input type="hidden" name="date_id" value="{{ date('m/d/Y') }}">
-                <input type="hidden" name="customer" value="{{ $pending->customer }}">
+                <input type="hidden" name="customer_id" value="{{ $pending->customer_id }}">
 
                 @csrf
                   @php
@@ -109,8 +109,8 @@
                   </div>
                   <div class="relative z-0 w-full mb-6 group p-4 flex justify-between">
                       <button type="button"
-                          class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" data-drawer-hide="add_pending_{{ $pending->customer }}"
-                          aria-controls="add_pending_{{ $pending->customer }}">Close</button>
+                          class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" data-drawer-hide="add_pending_{{ $pending->customer_id }}"
+                          aria-controls="add_pending_{{ $pending->customer_id }}">Close</button>
                       <button type="submit" 
                           class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save
                           Changes</button>

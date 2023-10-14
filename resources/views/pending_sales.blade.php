@@ -20,7 +20,7 @@
 
                 @if ($record->customer !== '')
                     <h1 class="text-5xl font-extrabold dark:text-white">Current Customer:<small
-                            class="ml-2 font-semibold text-gray-500 dark:text-gray-400">{{ $record->customer }}</small>
+                            class="ml-2 font-semibold text-gray-500 dark:text-gray-400">{{ $record->customer_name }}</small>
                     </h1>
                 @endif
             @endif
@@ -49,7 +49,7 @@
                             <th class="p-4">Gift Certificate</th>
                             <th class="p-4">Gift Voucher</th>
                             <th class="p-4">Loyalty Card</th>
-                            <th class="p-4">Actions</th>
+                            <th class="p-4">Total Amount</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +60,7 @@
                         @foreach ($pending_sales as $pending)
                             <tr>
                                 <td class="p-4">{{ $pending->date_id }}</td>
-                                <td class="p-4">{{ $pending->customer }}</td>
+                                <td class="p-4">{{ $pending->customer_name }}</td>
                                 <td class="p-4">{{ $pending->name }}</td>
                                 <td class="p-4">{{ $pending->service_name }}</td>
                                 <td class="p-4">{{ $pending->product_name }}</td>
@@ -97,21 +97,35 @@
                                 </td>
                             </tr>
                             @php
-                                $customer = $pending->customer;
+                                $customer = $pending->customer_id;
                             @endphp
                         @endforeach
                     </tbody>
                 </table>
             </div>
+<br>
+<br>
+
+            <h3>Total Amount:</h3>
+            <input type="text" id="disabled-input-2" aria-label="disabled input 2"
+                class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                value="{{$total_amount}}" disabled readonly>
+
+    
+        
+
+
             <div class="flex justify-between">
                 <div class="m-10 flex flex-row-reverse ">
+
+
 
                     @if ($record)
 
                         @if ($record->customer !== '')
-                            <button type="button" data-drawer-target="add_pending_{{ $pending->customer }}"
-                                data-drawer-show="add_pending_{{ $pending->customer }}" data-drawer-placement="right"
-                                aria-controls="add_pending_{{ $pending->customer }}"
+                            <button type="button" data-drawer-target="add_pending_{{ $pending->customer_id }}"
+                                data-drawer-show="add_pending_{{ $pending->customer_id }}"
+                                data-drawer-placement="right" aria-controls="add_pending_{{ $pending->customer_id }}"
                                 class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Add
                                 Another Order for the Current Custoemer</button>
                             @include('components.add-pending')

@@ -17,7 +17,8 @@ class Sales extends Model
         'gcash',
         'gift_certificate',
         'gift_voucher',
-        'loyalty'
+        'loyalty',
+        'total_amount'
     ];
     use HasFactory;
 }

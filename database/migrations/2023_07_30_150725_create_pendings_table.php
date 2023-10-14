@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pendings', function (Blueprint $table) {
             $table->id();
             $table->string('date_id');
-            $table->string('customer');
+            $table->string('customer_id');
             $table->string('employees_id');
             $table->string('service_id');
             $table->string('product_id');
@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('gift_certificate');
             $table->integer('gift_voucher');
             $table->integer('loyalty');
+            $table->integer('total_amount')->nullable();
             $table->timestamps();
         });
     }

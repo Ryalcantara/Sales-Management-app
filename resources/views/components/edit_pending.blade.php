@@ -31,7 +31,7 @@
 
                 <input type="hidden" name="id" value="{{ $pending->id }}">
                 <input type="hidden" name="date_id" value="{{ date('m/d/Y') }}">
-                <input type="hidden" name="customer" value="{{ $pending->customer }}">
+                <input type="hidden" name="customer_id" value="{{ $pending->customer_id }}">
 
                 @php
                     $employee = $employees;

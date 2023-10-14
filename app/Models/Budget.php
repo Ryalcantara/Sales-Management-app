@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customers extends Model
+class Budget extends Model
 {
-    protected $primaryKey = 'customer_id';
+
+    protected $primaryKey = 'budget_id';
     protected $fillable = [
-        'customer_name',
-        'customer_type',
-        'contact_number',
+        'month',
+        'budget'
     ];
+
     use HasFactory;
 }

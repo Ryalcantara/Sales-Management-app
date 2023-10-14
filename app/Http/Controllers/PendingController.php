@@ -23,15 +23,30 @@ class PendingController extends Controller
             ->join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
             ->join('services', 'pendings.service_id', '=', 'services.service_id')
             ->join('products', 'pendings.product_id', '=', 'products.product_id')
+            ->join('customers', 'pendings.customer_id', '=', 'customers.customer_id')
             ->get();
 
-        $record = Pending::first();
+        $record = Pending::join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
+            ->join('services', 'pendings.service_id', '=', 'services.service_id')
+            ->join('products', 'pendings.product_id', '=', 'products.product_id')
+            ->join('customers', 'pendings.customer_id', '=', 'customers.customer_id')
+            ->first();
+
+        // Calculate total_amount by joining the tables and performing the necessary calculations
+        $total_amount = Pending::join('products', 'pendings.product_id', '=', 'products.product_id')
+            ->join('services', 'pendings.service_id', '=', 'services.service_id')
+            ->selectRaw('SUM(products.price * pendings.quant) + SUM(services.amount) as total_amount')
+            ->first();
+
+        // Assuming $total_amount is an instance of stdClass or an array
+        $totalAmountData = ['total_amount' => $total_amount->total_amount ?? 0];
 
         return view('/pending_sales', ['pending_sales' => $data])
             ->with('customers', Customers::all())
             ->with('employees', Employees::all())
             ->with('services', Services::all())
             ->with('products', Products::all())
+            ->with($totalAmountData)
             ->with(compact('record'));
     }
 
@@ -42,7 +57,7 @@ class PendingController extends Controller
     {
         $validated = $request->validate([
             'date_id' => ['required'],
-            'customer' => ['required'],
+            'customer_id' => ['required'],
             'employees_id' => ['required'],
             'service_id' => ['required'],
             'product_id' => ['required'],
@@ -53,9 +68,11 @@ class PendingController extends Controller
             'loyalty' => ['required'],
         ]);
 
+
+
         // Find an existing record based on the specified attributes
         $pendingRecord = Pending::where('date_id', $validated['date_id'])
-            ->where('customer', $validated['customer'])
+            ->where('customer_id', $validated['customer_id'])
             ->first();
 
 
@@ -64,7 +81,6 @@ class PendingController extends Controller
             $pendingRecord->delete();
         }
 
-        // Create a new record
         Pending::create($validated);
 
         // Update product quantity
@@ -79,7 +95,11 @@ class PendingController extends Controller
 
 
         // Find the first among the column, which case it will retrieve the customer's name
-        $record = Pending::first();
+        $record = Pending::join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
+            ->join('services', 'pendings.service_id', '=', 'services.service_id')
+            ->join('products', 'pendings.product_id', '=', 'products.product_id')
+            ->join('customers', 'pendings.customer_id', '=', 'customers.customer_id')
+            ->first();
 
         return redirect('/pending_sales')
             ->with(compact('record'));
@@ -89,7 +109,7 @@ class PendingController extends Controller
     {
         $validated = $request->validate([
             'date_id' => ['required'],
-            'customer' => ['required'],
+            'customer_id' => ['required'],
             'employees_id' => ['required'],
             'service_id' => ['required'],
             'product_id' => ['required'],
@@ -204,13 +224,17 @@ class PendingController extends Controller
 
 
 
-        $record = Pending::first();
+        $record = Pending::join('employees', 'pendings.employees_id', '=', 'employees.employees_id')
+            ->join('services', 'pendings.service_id', '=', 'services.service_id')
+            ->join('products', 'pendings.product_id', '=', 'products.product_id')
+            ->join('customers', 'pendings.customer_id', '=', 'customers.customer_id')
+            ->first();
 
 
 
-        return view('/pending_sales')
+        return redirect('/pending_sales')
             ->with(['pending_sales' => $data])
-            ->with('customers', Customers::all())
+            ->with('customer_id', Customers::all())
             ->with('employees', Employees::all())
             ->with('services', Services::all())
             ->with('products', Products::all())
@@ -224,7 +248,7 @@ class PendingController extends Controller
         foreach ($sourceData as $data) {
             Sales::create([
                 'date_id' => $data->date_id,
-                'customer' => $data->customer, // Map columns accordingly
+                'customer_id' => $data->customer_id, // Map columns accordingly
                 'employees_id' => $data->employees_id,
                 'service_id' => $data->service_id,
                 'product_id' => $data->product_id,
