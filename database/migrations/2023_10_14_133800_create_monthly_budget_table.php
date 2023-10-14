@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('monthly_budget', function (Blueprint $table) {
+        Schema::create('monthly_budgets', function (Blueprint $table) {
             $table->id('budget_id');
             $table->string('month');
             $table->double('budget');

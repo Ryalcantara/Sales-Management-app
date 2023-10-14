@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->string('date_id');
-            $table->string('customer');
+            $table->string('customer_id');
             $table->string('employees_id');
             $table->string('service_id');
             $table->string('product_id');

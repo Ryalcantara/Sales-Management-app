@@ -37,7 +37,7 @@
                             <th class="p-4">Gift Certificate</th>
                             <th class="p-4">Gift Voucher</th>
                             <th class="p-4">Loyalty</th>
-                            <th class="p-4">Action</th>
+                            {{-- <th class="p-4">Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +45,7 @@
                             <tr>
                                 <td class="p-4">{{ $sale->id }}</td>
                                 <td class="p-4">{{ $sale->date_id }}</td>
-                                <td class="p-4">{{ $sale->customer }}</td>
+                                <td class="p-4">{{ $sale->customer_name }}</td>
                                 <td class="p-4">{{ $sale->name }}</td>
                                 <td class="p-4">{{ $sale->service_name }}</td>
                                 <td class="p-4">{{ $sale->product_name }}</td>
@@ -54,7 +54,7 @@
                                 <td class="p-4">{{ $sale->gift_certificate }}</td>
                                 <td class="p-4">{{ $sale->gift_voucher }}</td>
                                 <td class="p-4">{{ $sale->loyalty }}</td>
-                                <td class="p-4">
+                                {{-- <td class="p-4">
                                     <button type="button" data-modal-target="popup-modal"
                                         data-modal-toggle="popup-modal_{{ $sale->id }}"
                                         class="text-white bg-pink-600 hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-600 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-pink-600 dark:hover:bg-pink-600 dark:focus:ring-pink-600">
@@ -63,7 +63,7 @@
                                         </span>
                                     </button>
                                     @include('components.delete_sale')
-                                </td>
+                                </td> --}}
 
                             </tr>
                         @endforeach

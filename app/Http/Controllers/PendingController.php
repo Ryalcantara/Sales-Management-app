@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Budget;
 use App\Models\Customers;
 use App\Models\Employees;
+use App\Models\MonthlyBudget;
 use App\Models\Pending;
 use App\Models\Products;
 use App\Models\Sales;
@@ -244,6 +246,34 @@ class PendingController extends Controller
 
     public function submit()
     {
+
+
+              // Calculate total_amount by joining the tables and performing the necessary calculations
+              $total_amount = Pending::join('products', 'pendings.product_id', '=', 'products.product_id')
+              ->join('services', 'pendings.service_id', '=', 'services.service_id')
+              ->selectRaw('SUM(products.price * pendings.quant) + SUM(services.amount) as total_amount')
+              ->first();
+  
+          // Assuming $total_amount is an instance of stdClass or an array
+          $totalAmountData = ['total_amount' => $total_amount->total_amount];
+          $currentMonthName = date('F'); // Returns the full month name (e.g., January, February, etc.)
+  
+          $existingBudget = MonthlyBudget::where('month', $currentMonthName)->first();
+  
+  
+          if ($existingBudget) {
+              // Step 2: Update the existing budget
+              $existingBudget->budget += $totalAmountData['total_amount'];
+              $existingBudget->save();
+          } else {
+              // Step 3: Insert a new record
+              MonthlyBudget::create([
+                  'month' => $currentMonthName,
+                  'budget' => $totalAmountData['total_amount'],
+              ]);
+          }
+
+          
         $sourceData = Pending::all();
         foreach ($sourceData as $data) {
             Sales::create([
@@ -262,6 +292,8 @@ class PendingController extends Controller
         }
 
         Pending::truncate(); // This will delete all data from the source table
+
+  
         return redirect('/sales');
     }
     public function getProductQuantity(Request $request)

@@ -15,6 +15,7 @@ class SalesController extends Controller
     {
         $data = DB::table('sales')
         ->join('employees', 'sales.employees_id', '=', 'employees.employees_id')
+        ->join('customers', 'sales.customer_id', '=', 'customers.customer_id')
         ->join('services', 'sales.service_id', '=', 'services.service_id')
         ->join('products', 'sales.product_id', '=', 'products.product_id')
         ->paginate(4);
@@ -72,6 +73,7 @@ class SalesController extends Controller
 
         $data = DB::table('sales')
         ->join('employees', 'sales.employees_id', '=', 'employees.employees_id')
+        ->join('customers', 'sales.customer_id', '=', 'customers.customer_id')
         ->join('services', 'sales.service_id', '=', 'services.service_id')
         ->join('products', 'sales.product_id', '=', 'products.product_id')
         ->get();;

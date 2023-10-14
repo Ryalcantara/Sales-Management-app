@@ -15,18 +15,20 @@ class DashboardController extends Controller
     {
         $data = DB::table('sales')
         ->join('employees', 'sales.employees_id', '=', 'employees.employees_id')
+        ->join('customers', 'sales.customer_id', '=', 'customers.customer_id')
         ->join('services', 'sales.service_id', '=', 'services.service_id')
         ->join('products', 'sales.product_id', '=', 'products.product_id')
         ->select(
             'sales.*',
             'employees.name',
+            'customers.customer_name',
             'services.service_name',
             'products.product_name',
             DB::raw('(products.price * sales.quant) as product_total'), // Calculate product total
             'services.amount as service_amount' // Assuming 'amount' is the field representing the service amount
         )
         // ->get()
-        ->paginate(2);
+        ->paginate(10);
 
 
 

@@ -34,7 +34,7 @@
                         <tr>
                             <td class="p-4">{{ $sale->id }}</td>
                             <td class="p-4">{{ $sale->date_id }}</td>
-                            <td class="p-4">{{ $sale->customer }}</td>
+                            <td class="p-4">{{ $sale->customer_name }}</td>
                             <td class="p-4">{{ $sale->name }}</td>
                             <td class="p-4">{{ $sale->service_name }}</td>
                             <td class="p-4">{{ $sale->product_name }}</td>

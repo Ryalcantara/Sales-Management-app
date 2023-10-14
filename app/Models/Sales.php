@@ -9,7 +9,7 @@ class Sales extends Model
 {
     protected $fillable = [
         'date_id',
-        'customer',
+        'customer_id',
         'employees_id',
         'service_id',
         'product_id',
