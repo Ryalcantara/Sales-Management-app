@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MonthlyBudget;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,12 +32,15 @@ class DashboardController extends Controller
         ->paginate(10);
 
 
+        $budget = MonthlyBudget::all();
 
+        // dd($budget);
        
 
         // return view('sales', compact('data'));
     
-    return view('/index', compact('data'));
+    return view('/index', compact('data'))
+    ->with(compact('budget'));
     
     }
 }
