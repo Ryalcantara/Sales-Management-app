@@ -102,7 +102,7 @@ Once you've installed all the dependencies, follow these steps:
 
 1. run command
     ```bash
-    npm run dev
+    npm run build
     ```
 
 2. run command
